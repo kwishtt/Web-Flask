@@ -64,14 +64,20 @@
 
         <div class="result-explanation">
             <h3>Giải thích dự đoán</h3>
-            <p>Dự đoán này được tính dựa trên mô hình Random Forest được train với:</p>
+            <div class="model-info">
+                <p><strong>🤖 Mô hình:</strong> {{ model_name }}</p>
+                <p><strong>🎯 Threshold:</strong> {{ threshold }}%</p>
+                <p><strong>📊 Xác suất thành công:</strong> {{ probability }}%</p>
+            </div>
+            <p>Dự đoán này được tính dựa trên mô hình ML tiên tiến với các yếu tố:</p>
             <ul>
                 <li><strong>Ngân sách & Thời lượng:</strong> Yếu tố kinh tế quan trọng</li>
                 <li><strong>Đánh giá & Số lượng vote:</strong> Chất lượng nội dung</li>
-                <li><strong>Thời gian phát hành:</strong> Yếu tố thời vụ</li>
+                <li><strong>Thời gian phát hành:</strong> Yếu tố thời vụ (mùa, ngày trong tuần)</li>
                 <li><strong>Thể loại & Quốc gia:</strong> Sở thích thị trường</li>
+                <li><strong>Feature Engineering:</strong> ROI, budget per minute, vote score, và các tương tác phức tạp</li>
             </ul>
-            <p class="note">* Dự đoán dựa trên phân tích 63 bộ phim Việt Nam, độ chính xác cao với F1-Score > 0.8 trong cross-validation.</p>
+            <p class="note">* Mô hình được train với hyperparameter tuning, SMOTE cho imbalance handling, và threshold optimization để tối ưu F1-Score.</p>
         </div>
     </div>
 </section>
