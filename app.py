@@ -430,8 +430,9 @@ def ai_advice():
         
         # Tạo prompt cho AI
         prompt = f"""
-Bạn là một chuyên gia phân tích phim và tư vấn sản xuất điện ảnh. 
-Dựa trên kết quả dự đoán từ mô hình Machine Learning, hãy đưa ra phân tích chi tiết và lời khuyên cho bộ phim sau:
+Bạn là một chuyên gia phân tích phim và tư vấn sản xuất điện ảnh — nhưng hãy trả lời **như đang nói chuyện với một người bạn**: thân thiện, trực tiếp, dễ hiểu và thực tế.
+
+Dựa trên kết quả dự đoán từ mô hình Machine Learning, hãy phân tích và tư vấn cho bộ phim dưới đây.
 
 **Thông tin phim:**
 - Tên phim: {data.get('title')}
@@ -447,21 +448,38 @@ Dựa trên kết quả dự đoán từ mô hình Machine Learning, hãy đưa 
 - Tháng phát hành: {data.get('release_month')}
 - Quốc gia: {data.get('country')}
 
-Hãy phân tích và đưa ra:
+Hãy trả lời bằng tiếng Việt, dùng **markdown** với heading `###`, bullet `-`, và nhấn mạnh bằng `**text**`. Giữ giọng **chuyên gia nhưng gần gũi**, và tập trung vào khuyến nghị có thể thực thi được.
 
-1. **Đánh giá tổng quan**: Nhận xét về khả năng thành công của phim dựa trên các chỉ số
-2. **Điểm mạnh**: Những yếu tố tích cực, lợi thế cạnh tranh
-3. **Điểm yếu/Rủi ro**: Những vấn đề cần lưu ý hoặc cải thiện
-4. **Lời khuyên cụ thể**: 3-5 khuyến nghị chiến lược về:
-   - Marketing và phát hành
-   - Ngân sách và đầu tư
-   - Thời điểm và thị trường mục tiêu
-   - Cải thiện nội dung nếu có thể
-5. **So sánh thị trường**: Tham chiếu các phim tương tự và xu hướng
+Yêu cầu phần phân tích:
 
-Trả lời bằng tiếng Việt, sử dụng định dạng markdown với heading (###), bullet points (-), và nhấn mạnh (**text**).
-Giữ văn phong chuyên nghiệp nhưng dễ hiểu, tập trung vào giá trị thực tiễn.
+### 1. **Đánh giá tổng quan**
+- Nói ngắn gọn (2–4 câu) về khả năng thành công dựa trên các chỉ số chính (probability, confidence, rating, budget, v.v).
+- Nếu cần, cho biết mức rủi ro tổng thể: **Thấp / Trung bình / Cao**.
+
+### 2. **Điểm mạnh**
+- Liệt kê 3–5 yếu tố tích cực nổi bật (ví dụ: đề tài, độ nhận diện, điểm đánh giá, yếu tố thương mại).
+- Mỗi bullet kèm 1 câu giải thích ngắn.
+
+### 3. **Điểm yếu / Rủi ro**
+- Liệt kê 3–5 vấn đề cần lưu ý (ví dụ: ngân sách không tương xứng, target kém rõ, cạnh tranh tháng chiếu).
+- Với mỗi rủi ro, đề xuất 1 cách giảm thiểu cụ thể.
+
+### 4. **Lời khuyên cụ thể (3–5 đề xuất hành động)**
+- Chia làm 4 nhóm nhỏ: **Marketing & phát hành**, **Ngân sách & đầu tư**, **Thời điểm & thị trường mục tiêu**, **Cải thiện nội dung**.
+- Với mỗi nhóm, đưa 1–2 khuyến nghị rõ ràng, có thể đo lường (ví dụ: thay đổi ngày ra rạp sang Q4, giảm 15% chi phí non-production, tập trung PR vào cộng đồng X).
+- Nếu hợp lý, đề xuất KPI đơn giản để theo dõi (ví dụ: target CTR quảng cáo, số vé mục tiêu tuần đầu).
+
+### 5. **So sánh thị trường & xu hướng**
+- Nêu 2–3 phim tương tự (tên + lý do tương đồng) và rút ra bài học thực tế từ chúng.
+- Kết luận ngắn về xu hướng thị trường hiện tại ảnh hưởng tới phim này (ví dụ: demand cho phim indie, thị trường streaming, mùa lễ hội).
+
+### 6. **Kết luận ngắn & bước tiếp theo**
+- Kết thúc bằng 1–2 câu tóm tắt: có nên đầu tư/đi tiếp không, và ưu tiên hành động tiếp theo là gì.
+- (Thân mật) Hỏi một câu mở để tiếp: **"Bạn muốn mình bóc tách sâu vào phần marketing, ngân sách hay kịch bản?"**
+
+Lưu ý: ưu tiên **thực tiễn** hơn là thuật ngữ học thuật — hãy trình bày sao cho nhà sản xuất/đội marketing dễ hiểu và có thể hành động ngay.
 """
+
         
         # Gọi API Gemini
         response = model.generate_content(prompt)

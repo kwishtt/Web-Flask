@@ -689,6 +689,66 @@ input::placeholder {
     color: var(--text-muted);
 }
 
+/* Custom Select Styling */
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%236366f1' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.custom-select:hover {
+    background-color: rgba(99, 102, 241, 0.08);
+    border-color: var(--accent-primary);
+}
+
+.custom-select:focus {
+    background-color: rgba(99, 102, 241, 0.12);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.custom-select option {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: var(--spacing-sm);
+}
+
+.custom-select option:hover,
+.custom-select option:checked {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* Date Input Group */
+.date-input-group {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.month-select {
+    min-width: 140px;
+}
+
+.year-input {
+    min-width: 100px;
+}
+
+.date-separator {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 0 var(--spacing-xs);
+}
+
 .form-actions {
     display: flex;
     gap: var(--gap-md);
