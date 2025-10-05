@@ -3,82 +3,336 @@
 {% block title %}Kết quả dự đoán - {{ title }}{% endblock %}
 
 {% block content %}
-<section class="result">
-    <div class="container result-grid">
-        <div class="result-summary">
-            <h1>Kết quả dự đoán cho phim "{{ title }}"</h1>
-            <div class="prediction-score">
-                <div class="score-circle score-{{ color }}">
-                    <span class="score-number">{{ confidence }}%</span>
-                    <span class="score-label">Confidence</span>
+<section class="result-section">
+    <div class="container">
+        <!-- Header với tiêu đề phim -->
+        <div class="result-header">
+            <div class="result-breadcrumb">
+                <a href="{{ url_for('home') }}">Trang chủ</a>
+                <span class="separator">›</span>
+                <span>Kết quả dự đoán</span>
+            </div>
+            <h1 class="result-title">{{ title }}</h1>
+            <p class="result-subtitle">Phân tích dự đoán thành công bằng AI</p>
+        </div>
+
+        <!-- Prediction Result Card -->
+        <div class="result-main-card">
+            <div class="prediction-result">
+                <div class="prediction-circle-wrapper">
+                    <div class="prediction-circle prediction-{{ color }}">
+                        <div class="circle-inner">
+                            <span class="circle-icon">{{ icon }}</span>
+                            <span class="circle-percentage">{{ confidence }}%</span>
+                        </div>
+                        <svg class="circle-progress" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="circle-fill" cx="60" cy="60" r="54" 
+                                    style="--progress: {{ confidence }}"></circle>
+                        </svg>
+                    </div>
                 </div>
-                <div class="score-info">
-                    <h2 class="level-{{ color }}">{{ prediction }}</h2>
-                    <p>Mô hình AI dự đoán phim này sẽ {{ prediction.lower() }}</p>
+                
+                <div class="prediction-info">
+                    <h2 class="prediction-status prediction-status-{{ color }}">
+                        {{ prediction }}
+                    </h2>
+                    <p class="prediction-description">
+                        {% if color == 'success' %}
+                        Mô hình AI dự đoán phim này có khả năng <strong>đạt thành công cao</strong> 
+                        dựa trên các yếu tố: ngân sách, đánh giá, thể loại và thời điểm phát hành.
+                        {% else %}
+                        Mô hình AI dự đoán phim này có thể <strong>gặp khó khăn</strong> trong việc 
+                        đạt được thành công thương mại theo tiêu chí đề ra.
+                        {% endif %}
+                    </p>
+                    
+                    <div class="prediction-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">🤖</span>
+                            <div class="meta-content">
+                                <span class="meta-label">Mô hình</span>
+                                <span class="meta-value">{{ model_name }}</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎯</span>
+                            <div class="meta-content">
+                                <span class="meta-label">Ngưỡng quyết định</span>
+                                <span class="meta-value">{{ threshold }}%</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">📊</span>
+                            <div class="meta-content">
+                                <span class="meta-label">Xác suất thành công</span>
+                                <span class="meta-value">{{ probability }}%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="result-details">
-            <h3>Thông tin chi tiết</h3>
-            <div class="details-grid">
-                <div class="detail-item">
-                    <span class="detail-label">Ngân sách sản xuất</span>
-                    <span class="detail-value">${{ "{:,.0f}".format(budget) }}</span>
+        <!-- Movie Details Grid -->
+        <div class="result-grid">
+            <div class="result-card details-card">
+                <h3 class="card-title">
+                    <span class="title-icon">📋</span>
+                    Thông tin phim
+                </h3>
+                <div class="details-list">
+                    <div class="detail-row">
+                        <span class="detail-label">💰 Ngân sách sản xuất</span>
+                        <span class="detail-value">${{ "{:,.0f}".format(budget) }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">🎬 Thể loại</span>
+                        <span class="detail-value detail-badge">{{ genre }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">⭐ Đánh giá trung bình</span>
+                        <span class="detail-value">{{ vote_average }}/10</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">👥 Số lượng đánh giá</span>
+                        <span class="detail-value">{{ "{:,.0f}".format(vote_count) }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">⏱️ Thời lượng</span>
+                        <span class="detail-value">{{ runtime }} phút</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">📅 Năm phát hành</span>
+                        <span class="detail-value">{{ release_year }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">📆 Tháng phát hành</span>
+                        <span class="detail-value">Tháng {{ release_month }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">🌍 Quốc gia sản xuất</span>
+                        <span class="detail-value detail-badge">{{ country }}</span>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">Thể loại</span>
-                    <span class="detail-value">{{ genre }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Đánh giá trung bình</span>
-                    <span class="detail-value">{{ vote_average }}/10</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Số lượng đánh giá</span>
-                    <span class="detail-value">{{ "{:,.0f}".format(vote_count) }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Thời lượng</span>
-                    <span class="detail-value">{{ runtime }} phút</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Năm phát hành</span>
-                    <span class="detail-value">{{ release_year }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Tháng phát hành</span>
-                    <span class="detail-value">{{ release_month }}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Quốc gia sản xuất</span>
-                    <span class="detail-value">{{ country }}</span>
+            </div>
+
+            <div class="result-card explanation-card">
+                <h3 class="card-title">
+                    <span class="title-icon">🧠</span>
+                    Giải thích dự đoán
+                </h3>
+                <div class="explanation-content">
+                    <p class="explanation-intro">
+                        Dự đoán này được tính toán bởi mô hình Machine Learning tiên tiến, 
+                        phân tích toàn diện các yếu tố ảnh hưởng đến thành công của phim:
+                    </p>
+                    <ul class="explanation-list">
+                        <li>
+                            <span class="list-icon">💵</span>
+                            <div class="list-content">
+                                <strong>Ngân sách & Thời lượng</strong>
+                                <p>Phân tích hiệu quả đầu tư và độ dài hợp lý của phim</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">⭐</span>
+                            <div class="list-content">
+                                <strong>Đánh giá & Lượng vote</strong>
+                                <p>Chất lượng nội dung và sự đón nhận của khán giả</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">📅</span>
+                            <div class="list-content">
+                                <strong>Thời điểm phát hành</strong>
+                                <p>Yếu tố thời vụ, mùa cao điểm và thời điểm chiến lược</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">🎭</span>
+                            <div class="list-content">
+                                <strong>Thể loại & Thị trường</strong>
+                                <p>Xu hướng thể loại và sở thích theo khu vực địa lý</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="list-icon">🔬</span>
+                            <div class="list-content">
+                                <strong>Feature Engineering</strong>
+                                <p>ROI, budget/phút, vote score và các tương tác phức tạp</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="explanation-note">
+                        <span class="note-icon">ℹ️</span>
+                        <p>
+                            Mô hình được huấn luyện với hyperparameter tuning, SMOTE để xử lý 
+                            mất cân bằng dữ liệu, và threshold optimization nhằm tối ưu F1-Score.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Action Buttons -->
         <div class="result-actions">
-            <a href="{{ url_for('home') }}" class="btn">Dự đoán phim khác</a>
-            <a href="{{ url_for('data_analysis') }}" class="btn-outline">Xem phân tích dữ liệu</a>
-        </div>
-
-        <div class="result-explanation">
-            <h3>Giải thích dự đoán</h3>
-            <div class="model-info">
-                <p><strong>🤖 Mô hình:</strong> {{ model_name }}</p>
-                <p><strong>🎯 Threshold:</strong> {{ threshold }}%</p>
-                <p><strong>📊 Xác suất thành công:</strong> {{ probability }}%</p>
-            </div>
-            <p>Dự đoán này được tính dựa trên mô hình ML tiên tiến với các yếu tố:</p>
-            <ul>
-                <li><strong>Ngân sách & Thời lượng:</strong> Yếu tố kinh tế quan trọng</li>
-                <li><strong>Đánh giá & Số lượng vote:</strong> Chất lượng nội dung</li>
-                <li><strong>Thời gian phát hành:</strong> Yếu tố thời vụ (mùa, ngày trong tuần)</li>
-                <li><strong>Thể loại & Quốc gia:</strong> Sở thích thị trường</li>
-                <li><strong>Feature Engineering:</strong> ROI, budget per minute, vote score, và các tương tác phức tạp</li>
-            </ul>
-            <p class="note">* Mô hình được train với hyperparameter tuning, SMOTE cho imbalance handling, và threshold optimization để tối ưu F1-Score.</p>
+            <button class="btn btn-ai" id="getAIAdviceBtn">
+                <span class="btn-icon">✨</span>
+                Nhận góp ý từ chuyên gia
+            </button>
+            <a href="{{ url_for('home') }}" class="btn btn-primary">
+                <span class="btn-icon">🎬</span>
+                Dự đoán phim khác
+            </a>
+            <a href="{{ url_for('data_analysis') }}" class="btn-outline">
+                <span class="btn-icon">📊</span>
+                Xem phân tích dữ liệu
+            </a>
         </div>
     </div>
 </section>
+
+<!-- AI Advice Modal -->
+<div id="aiAdviceModal" class="modal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>
+                <span class="modal-icon">🤖</span>
+                Góp ý từ chuyên gia Khuê Đinh
+            </h3>
+            <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="aiAdviceLoading" class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Chờ chút đi tui suy nghĩ cái đã..</p>
+            </div>
+            <div id="aiAdviceContent" class="advice-content" style="display: none;">
+                <!-- AI response will be inserted here -->
+            </div>
+            <div id="aiAdviceError" class="error-state" style="display: none;">
+                <span class="error-icon">⚠️</span>
+                <p>Không thể kết nối với chuyên gia. Vui lòng thử lại sau.</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-outline" id="modalCloseBtn">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Store movie data for AI request
+const movieData = {
+    title: {{ title|tojson }},
+    prediction: {{ prediction|tojson }},
+    confidence: {{ confidence|tojson }},
+    probability: {{ probability|tojson }},
+    budget: {{ budget|tojson }},
+    genre: {{ genre|tojson }},
+    vote_average: {{ vote_average|tojson }},
+    vote_count: {{ vote_count|tojson }},
+    runtime: {{ runtime|tojson }},
+    release_year: {{ release_year|tojson }},
+    release_month: {{ release_month|tojson }},
+    country: {{ country|tojson }}
+};
+
+// Modal controls
+const modal = document.getElementById('aiAdviceModal');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const getAdviceBtn = document.getElementById('getAIAdviceBtn');
+const loadingState = document.getElementById('aiAdviceLoading');
+const contentState = document.getElementById('aiAdviceContent');
+const errorState = document.getElementById('aiAdviceError');
+
+// Open modal and fetch AI advice
+getAdviceBtn.addEventListener('click', async () => {
+    modal.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
+    
+    // Reset states
+    loadingState.style.display = 'flex';
+    contentState.style.display = 'none';
+    errorState.style.display = 'none';
+    
+    try {
+        const response = await fetch('/api/ai-advice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieData)
+        });
+        
+        if (!response.ok) {
+            throw new Error('API request failed');
+        }
+        
+        const data = await response.json();
+        
+        // Hide loading, show content
+        loadingState.style.display = 'none';
+        contentState.style.display = 'block';
+        contentState.innerHTML = formatAIResponse(data.advice);
+        
+    } catch (error) {
+        console.error('Error fetching AI advice:', error);
+        loadingState.style.display = 'none';
+        errorState.style.display = 'flex';
+    }
+});
+
+// Close modal handlers
+function closeModal() {
+    modal.classList.remove('modal-open');
+    document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modalCloseBtn.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
+
+// Format AI response with markdown-like styling
+function formatAIResponse(text) {
+    // Convert markdown-style formatting to HTML
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Split into paragraphs
+    const paragraphs = text.split('\n\n');
+    let html = '';
+    
+    paragraphs.forEach(para => {
+        if (para.trim().startsWith('###')) {
+            // Heading
+            html += `<h4>${para.replace(/###\s*/, '')}</h4>`;
+        } else if (para.trim().startsWith('-') || para.trim().startsWith('•')) {
+            // List
+            const items = para.split('\n').filter(line => line.trim());
+            html += '<ul>';
+            items.forEach(item => {
+                html += `<li>${item.replace(/^[-•]\s*/, '')}</li>`;
+            });
+            html += '</ul>';
+        } else if (para.trim()) {
+            // Regular paragraph
+            html += `<p>${para}</p>`;
+        }
+    });
+    
+    return html;
+}
+
+// Escape key to close modal
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('modal-open')) {
+        closeModal();
+    }
+});
+</script>
 {% endblock %}

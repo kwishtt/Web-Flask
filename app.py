@@ -115,6 +115,9 @@ def engineer_features(df):
     # 2. ROI (nếu có Revenue)
     if 'Budget' in df.columns and 'Revenue' in df.columns:
         df['ROI'] = df['Revenue'] / (df['Budget'] + 1)
+    elif 'Budget' in df.columns:
+        # Nếu không có Revenue, estimate ROI = 1.0 (break-even)
+        df['ROI'] = 1.0
     
     # 3. Log transforms
     if 'Budget' in df.columns:
@@ -136,10 +139,13 @@ def engineer_features(df):
     if 'Vote Average' in df.columns and 'Vote Count' in df.columns:
         df['vote_score'] = df['Vote Average'] * np.log1p(df['Vote Count'])
     
-    # 5. Missing value flags
+    # 5. Missing value flags (set to 0 for prediction since we have values)
     for col in ['Budget', 'Revenue', 'Runtime', 'Vote Average']:
+        col_name = col.lower().replace(" ", "_")
         if col in df.columns:
-            df[f'is_missing_{col.lower().replace(" ", "_")}'] = df[col].isnull().astype(int)
+            df[f'is_missing_{col_name}'] = 0  # Set to 0 since we have values from form
+        else:
+            df[f'is_missing_{col_name}'] = 1  # Set to 1 if column doesn't exist
     
     return df
 
@@ -153,18 +159,28 @@ def prepare_input_data(form_data):
     if USE_NEW_MODEL:
         # Sử dụng feature engineering cho mô hình mới
         data = {
+            # Required original columns
+            'Id': 0,
+            'Original Title': form_data.get('title', 'Unknown'),
+            'Original Language': 'en',
+            'Revenue': 0,  # Will be predicted
             'Budget': float(form_data.get('budget', 0)),
             'Runtime': float(form_data.get('runtime', 120)),
             'Vote Average': float(form_data.get('vote_average', 5)),
             'Vote Count': float(form_data.get('vote_count', 100)),
-            'Release Date': f"{int(form_data.get('release_year', 2024))}-{int(form_data.get('release_month', 1)):02d}-15"
+            'Release Date': f"{int(form_data.get('release_year', 2024))}-{int(form_data.get('release_month', 1)):02d}-15",
+            
+            # Categorical features
+            'Genres': f"['{form_data.get('genre', 'Drama')}']",
+            'Production Companies': '[]',
+            'Production Countries': f"['{form_data.get('country', 'United States of America')}']",
+            'Spoken Languages': "['English']",
+            'Director': 'Unknown',
+            'Stars': 'Unknown',
+            
+            # Will be calculated in engineer_features
+            'ROI': 1.0  # Placeholder
         }
-        
-        # Thêm categorical features nếu có
-        if 'genre' in form_data:
-            data['Main_Genre'] = form_data['genre']
-        if 'country' in form_data:
-            data['Main_Country'] = form_data['country']
         
         # Tạo DataFrame
         df = pd.DataFrame([data])
@@ -305,21 +321,29 @@ def predict():
             result_icon = "⚠️"
             confidence = (1 - pred_proba) * 100
         
+        # Convert all numpy types to Python native types for JSON serialization
+        confidence_val = float(confidence)
+        probability_val = float(pred_proba * 100)
+        budget_val = float(budget)
+        vote_average_val = float(vote_average)
+        vote_count_val = int(vote_count)
+        runtime_val = int(runtime)
+        
         # Render kết quả
         return render_template("result.html",
                              title=title,
                              prediction=result_text,
-                             confidence=round(confidence, 1),
-                             probability=round(pred_proba * 100, 1),
+                             confidence=round(confidence_val, 1),
+                             probability=round(probability_val, 1),
                              color=result_class,
                              icon=result_icon,
-                             budget=budget,  # Pass số thực, format trong template
+                             budget=budget_val,
                              genre=form_data['genre'],
-                             vote_average=vote_average,
-                             vote_count=int(vote_count),  # Pass số nguyên
-                             runtime=int(runtime),  # Convert to int
-                             release_year=int(form_data['release_year']),  # Convert to int
-                             release_month=int(form_data['release_month']),  # Convert to int
+                             vote_average=vote_average_val,
+                             vote_count=vote_count_val,
+                             runtime=runtime_val,
+                             release_year=int(form_data['release_year']),
+                             release_month=int(form_data['release_month']),
                              country=form_data['country'],
                              model_name=MODEL_NAME,
                              threshold=round(BEST_THRESHOLD * 100, 1))
@@ -386,6 +410,81 @@ def model_info():
 def css_test():
     """Trang test CSS"""
     return render_template('css_test.html')
+
+@app.route("/api/ai-advice", methods=["POST"])
+def ai_advice():
+    """API endpoint để lấy lời khuyên từ Gemini AI"""
+    try:
+        import google.generativeai as genai
+        
+        # Lấy dữ liệu phim từ request
+        data = request.get_json()
+        
+        # Configure Gemini API
+        # Sử dụng API key từ environment hoặc config
+        api_key = 'AIzaSyBJJE-2b49j7R8ugRgNVYC-N32QPSE8xN0'
+        genai.configure(api_key=api_key)
+        
+        # Tạo model
+        model = genai.GenerativeModel('gemini-2.5-flash')  # Hoặc 'gemini-pro'
+        
+        # Tạo prompt cho AI
+        prompt = f"""
+Bạn là một chuyên gia phân tích phim và tư vấn sản xuất điện ảnh. 
+Dựa trên kết quả dự đoán từ mô hình Machine Learning, hãy đưa ra phân tích chi tiết và lời khuyên cho bộ phim sau:
+
+**Thông tin phim:**
+- Tên phim: {data.get('title')}
+- Dự đoán: {data.get('prediction')}
+- Độ tin cậy: {data.get('confidence')}%
+- Xác suất thành công: {data.get('probability')}%
+- Ngân sách: ${data.get('budget'):,.0f}
+- Thể loại: {data.get('genre')}
+- Đánh giá trung bình: {data.get('vote_average')}/10
+- Số lượng đánh giá: {data.get('vote_count'):,}
+- Thời lượng: {data.get('runtime')} phút
+- Năm phát hành: {data.get('release_year')}
+- Tháng phát hành: {data.get('release_month')}
+- Quốc gia: {data.get('country')}
+
+Hãy phân tích và đưa ra:
+
+1. **Đánh giá tổng quan**: Nhận xét về khả năng thành công của phim dựa trên các chỉ số
+2. **Điểm mạnh**: Những yếu tố tích cực, lợi thế cạnh tranh
+3. **Điểm yếu/Rủi ro**: Những vấn đề cần lưu ý hoặc cải thiện
+4. **Lời khuyên cụ thể**: 3-5 khuyến nghị chiến lược về:
+   - Marketing và phát hành
+   - Ngân sách và đầu tư
+   - Thời điểm và thị trường mục tiêu
+   - Cải thiện nội dung nếu có thể
+5. **So sánh thị trường**: Tham chiếu các phim tương tự và xu hướng
+
+Trả lời bằng tiếng Việt, sử dụng định dạng markdown với heading (###), bullet points (-), và nhấn mạnh (**text**).
+Giữ văn phong chuyên nghiệp nhưng dễ hiểu, tập trung vào giá trị thực tiễn.
+"""
+        
+        # Gọi API Gemini
+        response = model.generate_content(prompt)
+        
+        # Trả về kết quả
+        return jsonify({
+            'success': True,
+            'advice': response.text
+        })
+        
+    except ImportError:
+        logger.error("google-generativeai package not installed")
+        return jsonify({
+            'success': False,
+            'error': 'AI service not configured. Please install google-generativeai package.'
+        }), 500
+        
+    except Exception as e:
+        logger.error(f"Error calling Gemini API: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': f'Failed to get AI advice: {str(e)}'
+        }), 500
 
 # ==========================================
 # ERROR HANDLERS
