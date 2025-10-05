@@ -1,0 +1,341 @@
+feature,importance
+Vote Average,24.516277827498946
+Revenue,5.812399116239598
+ROI,4.34645439653003
+"Spoken Languages_['Tiếng Nhật', 'Tiếng Pháp', 'Tiếng Nga', 'Tiếng Anh', 'Tiếng Ả Rập']",3.129943835487726
+"Spoken Languages_['Tiếng Pháp', 'Tiếng Anh', 'Latin']",3.107675101480129
+"Production Countries_['Belgium', 'United States of America']",2.590153428678619
+Vote Count,2.5381760540357514
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Pháp', 'Tiếng Tây Ban Nha', 'Tiếng Hàn']",2.5118905486037875
+"Production Countries_['Belgium', 'Canada', 'Germany', 'United Kingdom']",2.5039132982522347
+"Spoken Languages_['Hong Kong', 'Tiếng Trung', 'Tiếng Hàn', 'Tiếng Pháp', 'Tiếng Anh']",2.402724680045922
+budget_vote_interaction,2.2987059890493473
+Budget,2.244028804591091
+"Spoken Languages_['Hong Kong', 'Tiếng Trung', 'Tiếng Tây Ban Nha']",2.204771889470761
+"Production Countries_['Australia', 'Canada', 'United Kingdom', 'United States of America']",2.1419248286998736
+"Spoken Languages_['Tiếng Tây Ban Nha', 'Tiếng Anh', 'Tiếng Bồ Đào Nha']",2.1293583856066145
+"Spoken Languages_['Hong Kong', 'Tiếng Anh', 'Tiếng Tây Ban Nha']",2.1291201975912104
+"Spoken Languages_['Tiếng Anh', 'Tiếng Bồ Đào Nha', 'Tiếng Tây Ban Nha']",2.097075221743816
+"Production Countries_['Hungary', 'United States of America']",2.081578606657264
+vote_count_log,2.021606552286949
+Production Countries_['Japan'],1.9850847109877165
+Spoken Languages_['Tiếng Tây Ban Nha'],1.9785437220489903
+"Production Countries_['Canada', 'France']",1.9555805233200922
+"Production Countries_['Hong Kong', 'Iceland', 'United States of America']",1.934162604116023
+"Spoken Languages_['Tiếng Hàn', 'Tiếng Thổ Nhĩ Kỳ']",1.839835157686254
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Anh', 'Tiếng Ý', 'Tiếng Ba Tư', 'Tiếng Ba Lan', 'Tiếng Tây Ban Nha', 'Tiếng Thổ Nhĩ Kỳ']",1.803841922201266
+"Production Countries_['Canada', 'France', 'United Kingdom', 'United States of America']",1.78534584623031
+"Production Countries_['Australia', 'United Kingdom', 'United States of America']",1.7548614918181566
+"Production Countries_['Mexico', 'United States of America']",1.7396022517939704
+"Spoken Languages_['Tiếng Anh', 'Tiếng Hàn']",1.7333703487673853
+"Production Countries_['Germany', 'India', 'United Kingdom', 'United States of America']",1.7102010237370178
+"Production Countries_['Spain', 'United States of America']",1.709994726323962
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nga', 'Tiếng Hàn']",1.703246882477043
+"Production Countries_['Belgium', 'China', 'France', 'Germany', 'United States of America']",1.6691069693838685
+"Production Countries_['United States of America', 'Germany']",1.6522228475533298
+"Production Countries_['France', 'United Kingdom', 'United States of America', 'Ireland']",1.6485773849946526
+"Production Countries_['Australia', 'India', 'Singapore', 'United States of America']",1.6363973516730206
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ả Rập', 'Tiếng Hy Lạp', 'Tiếng Hindi', '', 'Tiếng Punjab', 'Tiếng Ba Tư', 'Tiếng Nga', 'Tiếng Urdu']",1.6363973516730206
+"Spoken Languages_['Tiếng Đức', 'Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Pháp', 'Tiếng Kiswahili']",1.6214503803931435
+"Production Countries_['France', 'United Kingdom', 'United States of America']",1.6148621994641292
+"Spoken Languages_['Tiếng Nga', 'Tiếng Anh']",1.6133974191785079
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Ý', 'Tiếng Ả Rập', 'Tiếng Tây Ban Nha']",1.5850308587470638
+"Production Countries_['France', 'Singapore', 'Vietnam']",1.5785820295332695
+"Production Countries_['United Arab Emirates', 'United States of America']",1.5702591050526606
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức', 'Lietuvių', 'Tiếng Nga']",1.567554820315832
+"Spoken Languages_['Tiếng Đức', 'Hong Kong', 'Tiếng Anh', 'Tiếng Trung', 'Tiếng Nga']",1.5603735556459324
+"Spoken Languages_['Tiếng Anh', 'Tiếng Trung', 'Tiếng Hàn']",1.5531952121103452
+"Spoken Languages_['Tiếng Pháp', 'Tiếng Việt']",1.534952694165305
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Nga']",1.5347893244509812
+Production Countries_['United Kingdom'],1.5315553962524049
+"Spoken Languages_['Tiếng Việt', 'Tiếng Anh']",1.5275473662963064
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nhật', 'Tiếng Việt']",1.5053466954799037
+"Production Countries_['Norway', 'United States of America']",1.4989560595771472
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Pháp', 'Tiếng Tây Ban Nha', 'Tiếng Nga']",1.4967068350703654
+"Production Countries_['Australia', 'Spain', 'United States of America']",1.4599240799333515
+"Spoken Languages_['Tiếng Tây Ban Nha', 'Tiếng Anh']",1.4583000109524555
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Nhật']",1.4563580776756737
+budget_per_minute,1.4426146965230198
+"Spoken Languages_['Tiếng Anh', 'Tiếng Châu Phi', 'Tiếng Tây Ban Nha']",1.4227065730119408
+"Production Countries_['Bulgaria', 'France', 'United States of America']",1.4064452932450768
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Ý', 'Latin', 'Tiếng Tây Ban Nha']",1.4028497492057077
+"Spoken Languages_['Hong Kong', 'Tiếng Trung']",1.396012860643761
+"Production Countries_['Belgium', 'France']",1.393355632437574
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Ý', 'Tiếng Nhật']",1.3912692336154016
+Spoken Languages_['Tiếng Nhật'],1.387577794025645
+"Spoken Languages_['Tiếng Anh', 'Latin']",1.3859687218380097
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Nga']",1.360519813054179
+"Production Countries_['Canada', 'China', 'Hungary', 'South Africa', 'United States of America']",1.344025265851333
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Bồ Đào Nha']",1.338081852362232
+"Spoken Languages_['Tiếng Anh', 'Tiếng Do Thái']",1.3374048920844233
+"Production Countries_['United States of America', 'Canada']",1.329017405750722
+"Production Countries_['Japan', 'United States of America']",1.3121410238132505
+Production Countries_['Spain'],1.3026208100554606
+"Production Countries_['China', 'Hungary', 'Spain', 'United States of America']",1.3011880167752463
+"Production Countries_['Iceland', 'United States of America', 'United Kingdom']",1.2981994157950334
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức', 'Tiếng Bồ Đào Nha', 'Tiếng Tây Ban Nha']",1.2916032041759475
+"Spoken Languages_['Tiếng Anh', 'Tiếng Lào', 'Tiếng Trung', 'Hong Kong']",1.2735827066232415
+"Spoken Languages_['Tiếng Anh', 'Tiếng Việt']",1.2667039538611962
+"Spoken Languages_['Tiếng Trung', 'Tiếng Tây Ban Nha']",1.2612801525602628
+"Production Countries_['Canada', 'United States of America', 'Australia']",1.242745719317684
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Bungari']",1.2302424631652105
+"Production Countries_['China', 'Hong Kong']",1.2251306230866614
+"Production Countries_['China', 'France', 'Hong Kong', 'Taiwan']",1.2183988907198355
+"Production Countries_['Canada', 'China', 'United States of America']",1.2161204700202548
+"Spoken Languages_['Tiếng Anh', 'Tiếng Gruzia']",1.19376747748077
+"Spoken Languages_['Tiếng Tây Ban Nha', 'Tiếng Anh', 'Tiếng Ukraina']",1.1923903736497174
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Anh', 'Tiếng Pháp', 'Tiếng Ý', 'Tiếng Nhật']",1.1805442171361682
+"Spoken Languages_['Tiếng Trung', 'Tiếng Hàn']",1.1801430480179227
+"Spoken Languages_['Tiếng Anh', 'Latin', 'Tiếng Bồ Đào Nha']",1.1722005584530621
+"Production Countries_['United States of America', 'Malaysia', 'Singapore']",1.1693042383749417
+Production Countries_['United Arab Emirates'],1.1570646201178774
+"Spoken Languages_['Tiếng Hàn', 'Tiếng Lào', 'Tiếng Tây Ban Nha', 'Tiếng Anh']",1.1551442461613812
+"Production Countries_['China', 'Japan', 'Canada', 'United States of America']",1.1538278392501145
+"Production Countries_['Bulgaria', 'Spain']",1.1512695601870033
+"Spoken Languages_['Tiếng Anh', 'Tiếng Lào']",1.1469610575118874
+"Production Countries_['Australia', 'Germany', 'United States of America']",1.136242454510089
+"Production Countries_['Japan', 'United Kingdom', 'United States of America']",1.1357995506269907
+"Spoken Languages_['Hong Kong', 'Tiếng Nhật', 'Tiếng Trung']",1.1338842744768824
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Indonesia', 'Tiếng Ý', 'Tiếng Bồ Đào Nha']",1.130790261804385
+"Production Countries_['Australia', 'United States of America', 'United Kingdom']",1.130790261804385
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức']",1.1244394956884454
+Spoken Languages_['Tiếng Na Uy'],1.1137504951474697
+Production Countries_['Norway'],1.1137504951474697
+"Production Countries_['Belgium', 'United Kingdom', 'United States of America']",1.1126854995686188
+"Production Countries_['Canada', 'Germany', 'United Kingdom', 'United States of America']",1.1012195178965454
+"Production Countries_['United States of America', 'United Kingdom']",1.1012097362164062
+"Spoken Languages_['Tiếng Hy Lạp', 'Tiếng Anh']",1.0947463036436442
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức', 'Tiếng Phần Lan', 'Tiếng Nhật', 'Hong Kong']",1.085000463201793
+"Spoken Languages_['Tiếng Hà Lan', 'Tiếng Đan Mạch', 'Tiếng Đức', 'Tiếng Pháp', 'Tiếng Anh']",1.0832824232618823
+"Spoken Languages_['Hong Kong', 'Tiếng Trung', 'Tiếng Anh']",1.0622349919707594
+Production Countries_['South Korea'],1.0605726461178657
+"Production Countries_['Belgium', 'Denmark', 'France', 'United States of America']",1.0552725817225967
+"Production Countries_['Australia', 'Denmark', 'United States of America']",1.0372970702233426
+"Spoken Languages_['Tiếng Đức', 'Tiếng Anh', 'Tiếng Pháp', 'Tiếng Ý']",1.0222789268111785
+"Production Countries_['Canada', 'Serbia', 'United States of America']",1.0152122300633522
+"Spoken Languages_['Tiếng Nga', 'Tiếng Hà Lan', 'Tiếng Ý', 'Tiếng Anh']",1.0023399497438663
+"Production Countries_['France', 'Guadaloupe', 'Russia', 'Serbia', 'United States of America']",1.0023399497438663
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Hy Lạp', 'Tiếng Nga']",0.9879837223098178
+"Production Countries_['Belgium', 'Germany', 'France', 'Romania', 'United Kingdom']",0.9817783294445322
+Spoken Languages_['Tiếng Mã Lai'],0.9751152203814057
+"Production Countries_['Argentina', 'Spain']",0.9692771852976984
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Pháp', 'Tiếng Nhật']",0.9660937493217052
+"Production Countries_['South Korea', 'Spain', 'United Kingdom', 'United States of America']",0.9651776784497477
+Production Countries_['Malaysia'],0.9619721463643073
+"Production Countries_['China', 'Germany', 'Japan', 'United Kingdom']",0.9604052953558639
+release_year,0.9344526748876257
+"Production Countries_['Canada', 'United States of America']",0.9273445410558926
+"Production Countries_['China', 'Hong Kong', 'United States of America']",0.9163148011323753
+"Production Countries_['Hong Kong', 'United States of America']",0.9036705425966363
+"Production Countries_['China', 'Colombia', 'Hungary', 'United States of America']",0.8864134950190494
+"Production Countries_['United States of America', 'France', 'Japan']",0.8848086962538174
+"Production Countries_['United States of America', 'India']",0.8798340496116156
+"Production Countries_['South Korea', 'United States of America']",0.8780502488001227
+"Spoken Languages_['Tiếng Tây Ban Nha', 'Tiếng Anh', 'Tiếng Đức']",0.8569754637146804
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Tây Ban Nha']",0.8519479185532187
+"Spoken Languages_['Tiếng Anh', 'Tiếng Hy Lạp', 'Tiếng Na Uy', 'Tiếng Tây Ban Nha']",0.8371701630179149
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nhật']",0.8315808214088103
+"Production Countries_['India', 'United Kingdom', 'United States of America']",0.8296596587316248
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ba Lan', 'Tiếng Tây Ban Nha']",0.822780802500206
+"Production Countries_['Canada', 'France', 'Germany', 'United States of America']",0.8219684620671894
+"Spoken Languages_['Tiếng Tây Ban Nha', 'Tiếng Pháp', 'Tiếng Anh']",0.8201188706991867
+"Production Countries_['Luxembourg', 'United States of America']",0.8201188706991867
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Ý', 'Tiếng Tây Ban Nha']",0.8068806415932059
+"Production Countries_['Canada', 'Japan', 'New Zealand', 'United States of America']",0.8032298682696305
+"Production Countries_['United States of America', 'France']",0.7818126151566437
+"Production Countries_['China', 'United States of America', 'United Kingdom']",0.7748400992240976
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Trung']",0.7747165724612329
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức']",0.7697857206783421
+"Spoken Languages_['Tiếng Trung', 'Tiếng Hàn', 'Tiếng Nhật']",0.7686666665596111
+"Production Countries_['Hong Kong', 'Japan', 'United States of America']",0.7664296707332191
+"Spoken Languages_['Tiếng Anh', 'Tiếng Bồ Đào Nha', 'Tiếng Nga']",0.7544873136571474
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ả Rập', 'Tiếng Ý', 'Tiếng Nhật']",0.7519084518466888
+"Spoken Languages_['Tiếng Ý', 'Tiếng Anh', 'Tiếng Nga', 'Tiếng Đức']",0.7484163413980728
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nhật', 'Tiếng Lào', 'Tiếng Việt']",0.7225727205531842
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ukraina']",0.7193307041916965
+"Spoken Languages_['Hong Kong', 'Tiếng Trung', 'Tiếng Anh', 'Tiếng Pháp']",0.7147440892915511
+"Production Countries_['Canada', 'Hong Kong', 'United States of America']",0.71023092488059
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Anh']",0.7015850379844301
+"Production Countries_['Malta', 'Morocco', 'United States of America']",0.7015850379844301
+"Production Countries_['China', 'United Kingdom', 'United States of America']",0.6991135976005608
+"Production Countries_['Australia', 'France', 'Hong Kong', 'Thailand']",0.6974134416996142
+"Spoken Languages_['Tiếng Anh', 'Tiếng Trung', 'Tiếng Lào', 'Tiếng Việt']",0.6974134416996142
+release_season,0.6974119008164749
+"Production Countries_['Brazil', 'China', 'United States of America']",0.6936662413069877
+"Spoken Languages_['Tiếng Anh', 'Tiếng Na Uy']",0.6936662413069877
+"Spoken Languages_['Tiếng Anh', 'Tiếng Trung']",0.6895917765144188
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức']",0.6851031069819445
+"Production Countries_['Argentina', 'Chile', 'Mexico', 'Peru']",0.6759229119935458
+"Spoken Languages_['Hong Kong', 'Tiếng Anh', 'Tiếng Mã Lai', 'Tiếng Lào']",0.6729203668821947
+Production Countries_['Hong Kong'],0.6729203668821947
+"Production Countries_['Canada', 'France', 'United States of America']",0.6426141885722154
+"Production Countries_['Czech Republic', 'United States of America']",0.6424608399020789
+"Spoken Languages_['Tiếng Anh', 'Tiếng Phần Lan', 'Tiếng Bồ Đào Nha']",0.641230592764192
+"Production Countries_['Finland', 'United Kingdom', 'United States of America']",0.641230592764192
+"Production Countries_['Czech Republic', 'South Korea']",0.640389440060706
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Nhật', 'Tiếng Hàn']",0.640389440060706
+"Spoken Languages_['Hong Kong', 'Tiếng Anh', 'Tiếng Nhật', 'Tiếng Nga']",0.6246519348683258
+"Spoken Languages_['Tiếng Pháp', 'Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Ý', 'Tiếng Đức']",0.6237784561582829
+Spoken Languages_['Tiếng Đức'],0.6229397166855142
+"Production Countries_['Canada', 'United Kingdom', 'United States of America']",0.6219500890421437
+"Production Countries_['India', 'United States of America']",0.6077390078418539
+"Spoken Languages_['Tiếng Đức', 'Tiếng Anh']",0.6050253756316619
+"Spoken Languages_['Tiếng Anh', 'Tiếng Urdu']",0.6047883970299424
+Production Countries_['India'],0.6037620841020698
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nhật', 'Tiếng Nga']",0.5975069169620606
+Spoken Languages_['Tiếng Nga'],0.595814913182755
+"Production Countries_['Canada', 'Kazakhstan', 'Hong Kong', 'Thailand', 'United States of America']",0.5938087897498321
+"Production Countries_['Dominican Republic', 'United Kingdom', 'United States of America']",0.5934581378386564
+"Production Countries_['United States of America', 'Malta', 'United Kingdom']",0.5904964585269399
+Spoken Languages_['Tiếng Trung'],0.5867345957883465
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp']",0.5848411879628544
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Anh', 'Tiếng Hindi', 'Latin', 'Tiếng Tây Ban Nha']",0.5779867622658585
+"Spoken Languages_['Tiếng Anh', 'Tiếng Iceland', 'Tiếng Tây Ban Nha']",0.5729056647472838
+"Production Countries_['France', 'United States of America', 'Thailand']",0.5727034947259613
+"Spoken Languages_['Tiếng Bungari', 'Tiếng Anh']",0.5727034947259613
+"Production Countries_['United Kingdom', 'United States of America']",0.5574120228199637
+"Production Countries_['Austria', 'Germany']",0.552455043060883
+"Spoken Languages_['Tiếng Croatia', 'Tiếng Trung', 'Tiếng Pháp', 'Tiếng Anh']",0.549766407046584
+"Production Countries_['Australia', 'China', 'United States of America']",0.5475310543268512
+"Production Countries_['Indonesia', 'United Kingdom', 'United States of America']",0.540457266212668
+"Production Countries_['Canada', 'Japan', 'United States of America']",0.5342454930517986
+"Production Countries_['Greece', 'United States of America']",0.5167522366328309
+"Production Countries_['China', 'France', 'India', 'United States of America']",0.5141517559830071
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ý', 'Tiếng Tây Ban Nha']",0.5131886468350672
+Spoken Languages_['Tiếng Pháp'],0.5032455604257853
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Tây Ban Nha']",0.5004852128909408
+"Spoken Languages_['Tiếng Anh', 'Tiếng Estonia']",0.486305355249116
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nhật', 'Tiếng Hàn']",0.47123202182216545
+"Production Countries_['Italy', 'United States of America']",0.46976156355497295
+"Production Countries_['Hong Kong', 'United Kingdom', 'United States of America']",0.4689062145794003
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Pháp']",0.4689062145794003
+"Production Countries_['Japan', 'United States of America', 'Spain', 'United Kingdom']",0.46587002272112676
+"Spoken Languages_['Hong Kong', 'Tiếng Hà Lan', 'Tiếng Anh', 'Tiếng Nhật', 'Tiếng Nga', 'Tiếng Tây Ban Nha']",0.46587002272112676
+"Production Countries_['Ireland', 'United States of America']",0.4637284602940173
+"Production Countries_['France', 'Indonesia', 'United States of America']",0.4585543363030356
+Spoken Languages_['Tiếng Indonesia'],0.4585543363030356
+"Spoken Languages_['Tiếng Anh', 'Tiếng Trung', 'Tiếng Nga']",0.45143896517694687
+"Production Countries_['China', 'Russia']",0.45143896517694687
+"Production Countries_['Spain', 'United Kingdom', 'United States of America']",0.44890660240708274
+"Production Countries_['Indonesia', 'Germany', 'United States of America']",0.44883786692864075
+"Production Countries_['United States of America', 'Canada', 'France']",0.4397912888850285
+"Spoken Languages_['Tiếng Anh', 'Tiếng Trung', 'Tiếng Hindi', 'Tiếng Đức', 'Tiếng Bồ Đào Nha', '']",0.43828991293420677
+Spoken Languages_['Tiếng Anh'],0.4370175219669677
+"Production Countries_['Hong Kong', 'South Korea']",0.4357652920693086
+"Production Countries_['Australia', 'United States of America']",0.42368349199043615
+"Production Countries_['Germany', 'United States of America']",0.41848736630496264
+"Production Countries_['India', 'United States of America', 'Germany']",0.41408511778234924
+"Spoken Languages_['Tiếng Nga', 'Tiếng Anh', 'Tiếng Đức']",0.41408511778234924
+"Production Countries_['Finland', 'United States of America']",0.4093412091047467
+"Spoken Languages_['Tiếng Thụy Điển', 'Tiếng Anh', 'Tiếng Ý']",0.40918417615400193
+Production Countries_['United States of America'],0.39139733523112175
+"Spoken Languages_['Tiếng Nhật', 'Tiếng Anh', 'Tiếng Nga', 'Tiếng Tây Ban Nha']",0.3887086237767984
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ba Lan']",0.3846873942727349
+"Spoken Languages_['Tiếng Pháp', 'Tiếng Anh', 'Tiếng Ý', 'Tiếng Nga']",0.3831160537641749
+"Production Countries_['Canada', 'Ireland', 'United States of America']",0.3747636929204105
+"Production Countries_['Canada', 'South Korea', 'United States of America']",0.36687828002498574
+"Production Countries_['New Zealand', 'United States of America']",0.36633320192851393
+"Spoken Languages_['Tiếng Anh', 'Tiếng Do Thái', 'Tiếng Ý', 'Tiếng Nga']",0.3520685979423321
+"Spoken Languages_['Tiếng Anh', 'Tiếng Phần Lan', 'Tiếng Hungary', 'Tiếng Nhật', 'Tiếng Nga', 'Tiếng Somali', 'Tiếng Tây Ban Nha']",0.3491003833070984
+"Production Countries_['Germany', 'United Kingdom', 'United States of America']",0.3404174637098084
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', '', 'Tiếng Tây Ban Nha']",0.33691624377086715
+"Spoken Languages_['Tiếng Hindi', 'Tiếng Anh']",0.33237270625366916
+"Production Countries_['China', 'Japan', 'United States of America']",0.3306452126995332
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Mã Lai']",0.32304974460870084
+Production Countries_['France'],0.3126101210435302
+"Production Countries_['China', 'Hong Kong', 'Iceland', 'India', 'South Korea', 'United Arab Emirates']",0.3121874246346846
+"Spoken Languages_['Tiếng Anh', 'Tiếng Hindi', 'Tiếng Trung', 'Tiếng Bồ Đào Nha']",0.3121874246346846
+"Production Countries_['Spain', 'Thailand', 'United States of America']",0.3108774831990295
+"Spoken Languages_['Tiếng Anh', 'Tiếng Thụy Điển', 'Tiếng Lào']",0.3108774831990295
+"Production Countries_['Czech Republic', 'Romania', 'United Kingdom', 'United States of America']",0.3071262059850036
+Production Countries_['China'],0.30648902675243406
+"Production Countries_['Austria', 'Canada', 'China', 'Germany', 'Italy', 'United States of America']",0.3025586535071143
+"Spoken Languages_['Tiếng Nhật', 'Tiếng Anh', 'Tiếng Trung']",0.3010942478055822
+"Production Countries_['United Kingdom', 'Poland']",0.2935811879181383
+"Spoken Languages_['Tiếng Thụy Điển', 'Tiếng Anh']",0.29067125240601477
+"Production Countries_['Australia', 'United Kingdom']",0.2888767945201783
+"Production Countries_['Vietnam', 'South Korea']",0.2852209696797703
+"Spoken Languages_['Tiếng Đức', 'Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Pháp', 'Tiếng Nga']",0.2830102520085024
+"Spoken Languages_['Tiếng Đức', 'Tiếng Anh', 'Tiếng Thụy Điển']",0.2764030448286977
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Bồ Đào Nha', 'Tiếng Ý']",0.2759868867593802
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Thụy Điển']",0.27480031940582267
+Spoken Languages_['Tiếng Hindi'],0.271389377848403
+"Spoken Languages_['Tiếng Pháp', 'Tiếng Na Uy', 'Tiếng Anh']",0.27084832987732194
+"Production Countries_['Canada', 'India', 'United Kingdom', 'United States of America']",0.2570869279436753
+"Production Countries_['Canada', 'Spain', 'United States of America']",0.25678202445780995
+"Production Countries_['United States of America', 'Australia']",0.25412939758620007
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Ả Rập', 'Tiếng Albania']",0.2530533893193005
+"Production Countries_['Belgium', 'China', 'Spain', 'Switzerland', 'United Kingdom', 'United States of America']",0.2504321085736472
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Nhật', 'Tiếng Nga', 'Tiếng Tây Ban Nha']",0.23866343526239533
+Production Countries_['Russia'],0.2346645513341602
+"Production Countries_['France', 'United States of America']",0.23436461216997367
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Trung', 'Tiếng Anh', 'Tiếng Indonesia', 'Tiếng Ý', 'Tiếng Nhật', 'Latin', 'Tiếng Nga']",0.23298651158419928
+"Production Countries_['Sweden', 'United Kingdom', 'France', 'Belgium']",0.23245026949780298
+"Spoken Languages_['Hong Kong', 'Tiếng Trung', 'Tiếng Anh', 'Tiếng Đức', 'Tiếng Indonesia', 'Tiếng Ý', 'Tiếng Tây Ban Nha']",0.2215669446398593
+"Spoken Languages_['Tiếng Việt', 'Tiếng Hàn']",0.21895104883896693
+"Production Countries_['South Korea', 'Vietnam']",0.21895104883896693
+"Spoken Languages_['Tiếng Anh', 'Tiếng Somali']",0.21780632019531593
+Spoken Languages_['Tiếng Việt'],0.20845590162945538
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh']",0.19608311740684414
+"Production Countries_['United Kingdom', 'United States of America', 'Germany']",0.1953912594902682
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức', 'Tiếng Ý', 'Tiếng Pháp']",0.1953912594902682
+"Production Countries_['Australia', 'Hong Kong', 'United States of America']",0.18031617678166836
+"Spoken Languages_['Tiếng Ả Rập', 'Hong Kong', 'Tiếng Anh', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Nhật', 'Latin', 'Tiếng Nga', 'Tiếng Tây Ban Nha']",0.173849383057433
+Production Countries_['Vietnam'],0.1703337714211507
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nga', 'Tiếng Tây Ban Nha']",0.1608831162389294
+Spoken Languages_['Tiếng Hàn'],0.15832433991523925
+"Spoken Languages_['Tiếng Đức', 'Tiếng Anh', 'Tiếng Croatia']",0.15295202477251624
+"Production Countries_['Germany', 'Belgium', 'France', 'United States of America']",0.15295202477251624
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức', 'Tiếng Tây Ban Nha']",0.15270125019302172
+"Production Countries_['United States of America', 'United Kingdom', 'Indonesia', 'Canada', 'China', 'Singapore']",0.15188795594323176
+"Spoken Languages_['Tiếng Anh', 'Tiếng Indonesia']",0.15188795594323176
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha', 'Hong Kong']",0.14574263102168747
+"Production Countries_['Czech Republic', 'Germany', 'United Kingdom', 'United States of America']",0.14412412687874016
+"Spoken Languages_['Tiếng Nhật', 'Tiếng Anh']",0.14412412687874016
+"Production Countries_['Canada', 'Germany', 'United Kingdom', 'United States of America', 'Malaysia', 'Singapore']",0.1326826659684963
+"Production Countries_['Morocco', 'United States of America']",0.12981559873839355
+"Production Countries_['Puerto Rico', 'United States of America']",0.127916027797743
+"Production Countries_['Germany', 'South Africa']",0.12701788285276966
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Hindi', 'Tiếng Nhật', 'Tiếng Tamil']",0.1235576630759737
+"Production Countries_['Canada', 'India', 'Taiwan', 'United Kingdom', 'United States of America']",0.1235576630759737
+"Production Countries_['Switzerland', 'United Kingdom', 'United States of America']",0.12112065775754453
+release_month,0.11803214760903143
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Nga', 'Tiếng Việt']",0.11509088152327299
+"Spoken Languages_['Tiếng Anh', 'Tiếng Bồ Đào Nha']",0.11188909891082506
+"Production Countries_['Hong Kong', 'China']",0.1049528099712818
+"Production Countries_['United States of America', 'Russia']",0.10470039875778635
+"Production Countries_['China', 'United States of America']",0.10379729342821623
+"Production Countries_['Puerto Rico', 'United Kingdom', 'United States of America']",0.1001454492659486
+Spoken Languages_[],0.09961599242833996
+"Production Countries_['France', 'Netherlands', 'United Kingdom', 'United States of America']",0.09284841946276132
+"Spoken Languages_['Tiếng Trung', 'Tiếng Nhật', 'Tiếng Anh']",0.09169849521546988
+Runtime,0.08403395811722741
+"Spoken Languages_['Tiếng Trung', 'Tiếng Anh', 'Tiếng Nga']",0.07913594035792287
+"Spoken Languages_['Tiếng Pháp', 'Tiếng Anh']",0.07374392409257971
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ý']",0.06718701239176536
+"Spoken Languages_['Tiếng Anh', 'Tiếng Gruzia', 'Tiếng Ý']",0.06714612034271197
+"Production Countries_['Canada', 'China', 'France', 'United States of America']",0.06617022788667132
+"Spoken Languages_['Tiếng Ả Rập', 'Tiếng Anh', 'Tiếng Tây Ban Nha', 'Tiếng Lào']",0.06576151171878131
+"Spoken Languages_['Hong Kong', 'Tiếng Anh', 'Tiếng Nga', 'Tiếng Tây Ban Nha']",0.06538732907620308
+"Spoken Languages_['Tiếng Tây Ban Nha', 'Tiếng Anh', 'Tiếng Pháp']",0.05831095518904516
+"Spoken Languages_['Tiếng Séc', 'Tiếng Hà Lan', 'Tiếng Anh', 'Tiếng Đức', 'Tiếng Ý']",0.045284473566717394
+"Spoken Languages_['Tiếng Anh', 'Tiếng Hindi', 'Tiếng Ý', 'Tiếng Tây Ban Nha']",0.04230920213086855
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Ý']",0.04169920652621207
+"Production Countries_['Bulgaria', 'United States of America']",0.0399063444202008
+"Production Countries_['Germany', 'Canada', 'United States of America']",0.0373900185354753
+"Spoken Languages_['Tiếng Châu Phi', 'Tiếng Anh', 'Tiếng Đức', 'Tiếng Nga']",0.0373900185354753
+"Spoken Languages_['Tiếng Romania', 'Tiếng Anh', 'Tiếng Đức', 'Tiếng Nga']",0.035197788185852355
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nga']",0.03305072266517685
+"Spoken Languages_['Tiếng Anh', 'Tiếng Ba Tư', 'Tiếng Ả Rập']",0.03025553077222946
+"Production Countries_['France', 'Germany', 'Poland', 'United Kingdom']",0.023970215146329802
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức', 'Tiếng Ba Lan', 'Tiếng Nga']",0.023970215146329802
+"Production Countries_['United Kingdom', 'Germany', 'United States of America']",0.019892528006960456
+release_weekday,0.01834681669914991
+"Spoken Languages_['Tiếng Anh', 'Tiếng Tây Ban Nha']",0.015282687102039965
+"Spoken Languages_['Tiếng Hà Lan', 'Tiếng Anh']",0.015098687710250327
+"Production Countries_['Vietnam', 'United States of America']",0.009065095076859904
+"Spoken Languages_['Tiếng Anh', 'Tiếng Đức', 'Tiếng Hàn']",0.007424775162499084
+"Spoken Languages_['Tiếng Anh', 'Tiếng Trung', 'Tiếng Đức', 'Tiếng Nga']",0.005394778946852826
+"Spoken Languages_['Tiếng Anh', 'Tiếng Pháp', 'Tiếng Nhật', 'Tiếng Kiswahili']",0.0007399705395242271
+Production Countries_['Cambodia'],0.0003469531319568294
+"Spoken Languages_['Tiếng Anh', 'Tiếng Nhật', '']",0.00015177764137223803
