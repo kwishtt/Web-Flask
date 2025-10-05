@@ -290,6 +290,9 @@ def predict():
         
         logger.info(f"Probability: {pred_proba:.4f}, Threshold: {BEST_THRESHOLD:.4f}, Prediction: {prediction}")
         
+        # Debug: Check types before rendering
+        logger.info(f"DEBUG - Types: budget={type(budget)}, runtime={type(runtime)}, vote_count={type(vote_count)}, release_year={type(form_data['release_year'])}")
+        
         # Kết quả
         if prediction == 1:
             result_text = "Thành công"
@@ -322,7 +325,9 @@ def predict():
                              threshold=round(BEST_THRESHOLD * 100, 1))
     
     except Exception as e:
+        import traceback
         logger.error(f"Lỗi khi dự đoán: {str(e)}")
+        logger.error(f"Traceback:\n{traceback.format_exc()}")
         flash(f"❌ Lỗi: {str(e)}", "error")
         return home()
 
