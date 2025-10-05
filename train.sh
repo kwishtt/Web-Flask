@@ -9,7 +9,6 @@ echo "HUẤN LUYỆN MÔ HÌNH DỰ ĐOÁN THÀNH CÔNG PHIM"
 echo "=========================================="
 echo ""
 
-
 # Kiểm tra Python version
 python_version=$(python3 --version 2>&1 | awk '{print $2}')
 echo "Python version: $python_version"

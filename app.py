@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 # Khởi tạo Flask app
 app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 app.config["SECRET_KEY"] = "movie-success-predictor-ml-2024"
+app.config["VERSION"] = "3.0"  # Tăng version để clear cache - Modern UI
 
 # ==========================================
 # LOAD MÔ HÌNH ML MỚI
@@ -309,10 +310,10 @@ def predict():
                              probability=round(pred_proba * 100, 1),
                              color=result_class,
                              icon=result_icon,
-                             budget=f"{budget:,.0f}",
+                             budget=budget,  # Pass số thực, format trong template
                              genre=form_data['genre'],
                              vote_average=vote_average,
-                             vote_count=vote_count,
+                             vote_count=int(vote_count),  # Pass số nguyên
                              runtime=runtime,
                              release_year=form_data['release_year'],
                              release_month=form_data['release_month'],
@@ -375,6 +376,11 @@ def model_info():
         'metrics': MODEL_METRICS,
         'status': 'active'
     })
+
+@app.route("/css-test")
+def css_test():
+    """Trang test CSS"""
+    return render_template('css_test.html')
 
 # ==========================================
 # ERROR HANDLERS
