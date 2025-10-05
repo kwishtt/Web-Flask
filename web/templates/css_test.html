@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}CSS Test - Debug Styling{% endblock %}
+
+{% block content %}
+<section style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
+    <h1 style="color: white; margin-bottom: 2rem;">🎨 CSS Test Page</h1>
+    
+    <!-- Test CSS Variables -->
+    <div style="background: var(--surface); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 2rem;">
+        <h2 style="color: var(--accent);">CSS Variables Test</h2>
+        <p style="color: var(--text);">Nếu bạn thấy box này với background tối, border mờ, và text màu tím, CSS đã được load!</p>
+        <ul style="color: var(--muted);">
+            <li>--bg: <span style="background: var(--bg); padding: 0.5rem; border: 1px solid white;">Black background</span></li>
+            <li>--accent: <span style="background: var(--accent); padding: 0.5rem; color: white;">Purple</span></li>
+            <li>--text: <span style="color: var(--text);">Light text</span></li>
+        </ul>
+    </div>
+
+    <!-- Test Animations -->
+    <div class="feature-card" style="margin-bottom: 2rem; animation: scaleIn 0.6s ease-out;">
+        <h2>Animation Test - scaleIn</h2>
+        <p>Card này nên có animation scaleIn khi load.</p>
+    </div>
+
+    <!-- Test Classes -->
+    <div class="prediction-form" style="margin-bottom: 2rem;">
+        <h2>Form Styling Test</h2>
+        <div class="form-group">
+            <label for="test-input">Test Input (should have nice styling)</label>
+            <input type="text" id="test-input" placeholder="Nhập để test..." />
+        </div>
+        <button class="btn">Test Button</button>
+    </div>
+
+    <!-- Test Stat Cards -->
+    <div class="hero-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+        <div class="stat-item">
+            <span class="stat-number">85%</span>
+            <span class="stat-label">Test Stat 1</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100</span>
+            <span class="stat-label">Test Stat 2</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">🎬</span>
+            <span class="stat-label">Test Stat 3</span>
+        </div>
+    </div>
+
+    <!-- CSS Info -->
+    <div style="background: var(--bg-soft); padding: 1.5rem; border-radius: 12px; border-left: 3px solid var(--accent);">
+        <h3 style="color: var(--accent); margin-top: 0;">📊 CSS Load Status</h3>
+        <p>✅ Nếu bạn thấy styling đẹp ở trên → CSS đã load thành công!</p>
+        <p>❌ Nếu chỉ thấy text trắng trên nền đen → CSS chưa được áp dụng</p>
+        <hr style="border-color: var(--border); margin: 1rem 0;">
+        <p><strong>CSS File:</strong> {{ url_for('static', filename='css/style.css') }}?v={{ config.get('VERSION', '1.0') }}</p>
+        <p><strong>Static Folder:</strong> {{ config.get('STATIC_FOLDER', 'web/static') }}</p>
+        <p><strong>Version:</strong> {{ config.get('VERSION', '1.0') }}</p>
+    </div>
+
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="{{ url_for('home') }}" class="btn">← Về trang chủ</a>
+    </div>
+</section>
+
+<style>
+/* Inline CSS để test nếu external CSS không load */
+.inline-test {
+    background: linear-gradient(45deg, #ff0000, #00ff00);
+    padding: 1rem;
+    color: white;
+    margin: 1rem 0;
+}
+</style>
+
+<div class="inline-test" style="margin: 2rem auto; max-width: 1200px;">
+    ⚠️ INLINE CSS TEST: Nếu bạn thấy box này với gradient màu, inline CSS hoạt động.
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Check if CSS is loaded
+window.addEventListener('load', function() {
+    const body = document.body;
+    const computedStyle = window.getComputedStyle(body);
+    const bgColor = computedStyle.backgroundColor;
+    const fontFamily = computedStyle.fontFamily;
+    
+    console.log('=== CSS DEBUG INFO ===');
+    console.log('Background Color:', bgColor);
+    console.log('Font Family:', fontFamily);
+    console.log('Body has fadeIn animation:', computedStyle.animation);
+    
+    if (fontFamily.includes('Outfit')) {
+        console.log('✅ CSS LOADED - Font is Outfit');
+        alert('✅ CSS đã được load thành công!');
+    } else {
+        console.log('❌ CSS NOT LOADED - Font is default');
+        alert('❌ CSS chưa được load!\n\nHãy thử:\n1. Hard reload (Ctrl+Shift+R)\n2. Xóa cache browser\n3. Restart Flask app');
+    }
+});
+</script>
+{% endblock %}
