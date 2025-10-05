@@ -6,24 +6,55 @@
 <section class="data-header">
     <div class="container section-header">
         <p class="eyebrow">Data Analytics</p>
-        <h1>Phân tích dữ liệu phim đã từng chiếu rạp tại Việt Nam</h1>
+        <h1>Phân tích dữ liệu điện ảnh toàn cầu</h1>
         <p>Khám phá insights từ dataset {{ stats.total_movies }} bộ phim từ nhiều quốc gia thông qua biểu đồ trực quan</p>
+        
+        <!-- Data Quality Explanation -->
+        <div class="data-quality-info" style="background: rgba(139, 92, 246, 0.1); border-left: 4px solid #8b5cf6; padding: 20px; margin: 30px 0; border-radius: 8px;">
+            <h3 style="color: #8b5cf6; margin-top: 0; font-size: 1.2rem;">📊 Về dataset phân tích</h3>
+            <p style="color: #c5c7d4; line-height: 1.8; margin: 10px 0;">
+                <strong style="color: #fff;">Dataset gốc:</strong> 2,193 bộ phim từ nhiều quốc gia đã chiếu tại Việt Nam (1990-2024)<br>
+                <strong style="color: #fff;">Dataset phân tích:</strong> 1,018 bộ phim (46.4% dataset gốc)<br>
+                <strong style="color: #fff;">Bị loại bỏ:</strong> 1,175 bộ phim (53.6%) do thiếu dữ liệu quan trọng
+            </p>
+            <details style="margin-top: 15px; cursor: pointer;">
+                <summary style="color: #a855f7; font-weight: 600; cursor: pointer; user-select: none;">❓ Tại sao loại bỏ hơn 50% dữ liệu? (Click để xem chi tiết)</summary>
+                <div style="margin-top: 15px; padding-left: 20px; border-left: 2px solid rgba(139, 92, 246, 0.3);">
+                    <p style="color: #c5c7d4; line-height: 1.8;">
+                        <strong style="color: #fff;">Lý do khoa học:</strong> Để đảm bảo chất lượng phân tích và model ML, chúng tôi chỉ sử dụng phim có đầy đủ thông tin:
+                    </p>
+                    <ul style="color: #c5c7d4; line-height: 1.8; margin: 10px 0;">
+                        <li><strong style="color: #e74c3c;">774 phim</strong> không có dữ liệu <strong>Revenue</strong> (doanh thu) → Không thể tính ROI và đánh giá thành công tài chính</li>
+                        <li><strong style="color: #e74c3c;">399 phim</strong> không có dữ liệu <strong>Budget</strong> (ngân sách) → Không thể tính ROI = Revenue/Budget (chia cho 0)</li>
+                        <li><strong style="color: #e74c3c;">2 phim</strong> không có <strong>Vote Average</strong> → Không thể đánh giá chất lượng nội dung</li>
+                    </ul>
+                    <p style="color: #27ae60; font-weight: 600; margin-top: 15px;">
+                        ✅ Kết quả: 1,018 phim có đầy đủ Budget, Revenue, Runtime, Vote Average - đủ để train model ML chính xác!
+                    </p>
+                </div>
+            </details>
+        </div>
+
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-number">{{ stats.total_movies }}</span>
-                <span class="stat-label">Tổng số phim</span>
+                <span class="stat-label">Phim phân tích</span>
+                <span class="stat-sublabel" style="font-size: 0.75rem; color: #a855f7;">Từ 2,193 phim gốc</span>
             </div>
             <div class="stat-card">
                 <span class="stat-number">{{ "%.1f"|format(stats.success_rate) }}%</span>
                 <span class="stat-label">Tỷ lệ thành công</span>
+                <span class="stat-sublabel" style="font-size: 0.75rem; color: #27ae60;">ROI≥1 & Vote≥6.5</span>
             </div>
             <div class="stat-card">
                 <span class="stat-number">${{ "{:,.0f}".format(stats.avg_budget) }}</span>
                 <span class="stat-label">Ngân sách TB</span>
+                <span class="stat-sublabel" style="font-size: 0.75rem; color: #3498db;">Trung bình toàn cầu</span>
             </div>
             <div class="stat-card">
                 <span class="stat-number">{{ "%.1f"|format(stats.avg_vote) }}</span>
-                <span class="stat-label">Điểm TB</span>
+                <span class="stat-label">Điểm đánh giá TB</span>
+                <span class="stat-sublabel" style="font-size: 0.75rem; color: #e67e22;">Thang điểm 10</span>
             </div>
         </div>
     </div>
@@ -131,28 +162,32 @@
             <div class="insight-card">
                 <h4>🎯 Yếu tố quyết định thành công</h4>
                 <ul>
-                    <li>Ngân sách hợp lý (không quá cao hoặc quá thấp)</li>
-                    <li>Điểm đánh giá trên 6.5</li>
-                    <li>Thời lượng phim 90-120 phút</li>
-                    <li>Thể loại Drama và Comedy được ưa chuộng</li>
+                    <li><strong>ROI ≥ 1.0:</strong> Phim có lợi nhuận (thu hồi vốn đầu tư)</li>
+                    <li><strong>Vote Average ≥ 6.5:</strong> Điểm đánh giá tốt từ khán giả</li>
+                    <li>Thời lượng phim tối ưu: 90-120 phút</li>
+                    <li>Ngân sách hợp lý, không quá cao hoặc quá thấp</li>
+                    <li>{{ stats.movies_with_profit }} phim có lãi / {{ stats.movies_with_loss }} phim lỗ</li>
                 </ul>
             </div>
             <div class="insight-card">
-                <h4>📊 Thống kê tổng quan</h4>
+                <h4>📊 Thống kê chất lượng dữ liệu</h4>
                 <ul>
+                    <li><strong>Dataset gốc:</strong> {{ stats.total_raw_movies }} bộ phim (1990-2024)</li>
+                    <li><strong>Dataset phân tích:</strong> {{ stats.total_movies }} bộ phim ({{ "%.1f"|format(100 - stats.removal_percentage) }}%)</li>
+                    <li><strong>Đã loại bỏ:</strong> {{ stats.removed_movies }} phim thiếu dữ liệu quan trọng</li>
                     <li>{{ stats.genres_count }} thể loại phim khác nhau</li>
-                    <li>Doanh thu trung bình: ${{ "{:,.0f}".format(stats.avg_revenue) }}</li>
-                    <li>Thời lượng trung bình: {{ "%.0f"|format(stats.avg_runtime) }} phút</li>
-                    <li>Dữ liệu từ năm {{ stats.year_range.split(' - ')[0] }} đến {{ stats.year_range.split(' - ')[1] }}</li>
+                    <li>ROI trung bình: {{ "%.2f"|format(stats.avg_roi) }}x ({{ "%.0f"|format((stats.avg_roi - 1) * 100) }}% lợi nhuận)</li>
+                    <li>Doanh thu TB: ${{ "{:,.0f}".format(stats.avg_revenue) }}</li>
                 </ul>
             </div>
             <div class="insight-card">
                 <h4>💡 Khuyến nghị cho nhà sản xuất</h4>
                 <ul>
-                    <li>Tập trung vào chất lượng nội dung hơn ngân sách</li>
-                    <li>Chọn thời điểm phát hành phù hợp</li>
-                    <li>Đầu tư marketing để tăng vote count</li>
-                    <li>Học hỏi từ các phim thành công trong dataset</li>
+                    <li><strong>Chất lượng > Số lượng:</strong> Tập trung vào nội dung tốt hơn ngân sách khủng</li>
+                    <li><strong>Thời điểm phát hành:</strong> Chọn tháng/năm phù hợp với thể loại</li>
+                    <li><strong>Marketing hiệu quả:</strong> Tăng Vote Count để tạo buzz</li>
+                    <li><strong>Học từ dữ liệu:</strong> Phân tích {{ stats.total_movies }} phim thành công/thất bại</li>
+                    <li><strong>Đảm bảo ROI:</strong> {{ "%.1f"|format(stats.success_rate) }}% phim đạt tiêu chí thành công</li>
                 </ul>
             </div>
         </div>
@@ -162,7 +197,7 @@
 <section class="data-actions">
     <div class="container">
         <div class="actions-grid">
-            <a href="{{ url_for('home') }}" class="btn">Dự đoán phim mới</a>
+            <a href="{{ url_for('#predict') }}" class="btn">Dự đoán phim mới</a>
             <a href="#data-header" class="btn-outline">Xem lại biểu đồ</a>
         </div>
     </div>

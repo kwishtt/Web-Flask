@@ -49,10 +49,10 @@ def create_data_visualizations():
     # Create visualizations with modern styling
     visualizations = {}
 
-    # 1. Budget Distribution - Modern histogram
+    # 1. Budget Distribution - Modern histogram with better bins
     fig_budget = px.histogram(
-        df, x='Budget', nbins=20,
-        title='Phân bố ngân sách sản xuất phim',
+        df, x='Budget', nbins=30,
+        title=f'Phân bố ngân sách sản xuất phim (n={len(df)})',
         labels={'Budget': 'Ngân sách (USD)', 'count': 'Số lượng phim'},
         color_discrete_sequence=[colors['primary']],
         template='plotly_dark'
@@ -64,20 +64,35 @@ def create_data_visualizations():
         title_font_color=colors['primary'],
         title_font_size=20,
         showlegend=False,
-        bargap=0.1,
-        margin=dict(l=20, r=20, t=60, b=20)
+        bargap=0.05,
+        margin=dict(l=20, r=20, t=60, b=20),
+        xaxis=dict(
+            gridcolor='rgba(255,255,255,0.1)',
+            tickformat='$,.0f'
+        ),
+        yaxis=dict(gridcolor='rgba(255,255,255,0.1)')
     )
     fig_budget.update_traces(
         marker_line_color=colors['secondary'],
         marker_line_width=1,
         opacity=0.8
     )
+    # Add median line
+    median_budget = df['Budget'].median()
+    fig_budget.add_vline(
+        x=median_budget,
+        line_dash="dash",
+        line_color=colors['warning'],
+        annotation_text=f"Median: ${median_budget:,.0f}",
+        annotation_position="top",
+        annotation_font_color=colors['warning']
+    )
     visualizations['budget_dist'] = fig_budget.to_html(full_html=False, config={'displayModeBar': False})
 
-    # 2. Vote Average Distribution - Modern histogram
+    # 2. Vote Average Distribution - Modern histogram with better visualization
     fig_vote = px.histogram(
-        df, x='Vote Average', nbins=15,
-        title='Phân bố điểm đánh giá trung bình',
+        df, x='Vote Average', nbins=25,
+        title=f'Phân bố điểm đánh giá trung bình (n={len(df)})',
         labels={'Vote Average': 'Điểm đánh giá', 'count': 'Số lượng phim'},
         color_discrete_sequence=[colors['warning']],
         template='plotly_dark'
@@ -89,25 +104,50 @@ def create_data_visualizations():
         title_font_color=colors['warning'],
         title_font_size=20,
         showlegend=False,
-        bargap=0.1,
-        margin=dict(l=20, r=20, t=60, b=20)
+        bargap=0.05,
+        margin=dict(l=20, r=20, t=60, b=20),
+        xaxis=dict(gridcolor='rgba(255,255,255,0.1)'),
+        yaxis=dict(gridcolor='rgba(255,255,255,0.1)')
     )
     fig_vote.update_traces(
         marker_line_color=colors['warning'],
         marker_line_width=1,
         opacity=0.8
     )
+    # Add success threshold line
+    fig_vote.add_vline(
+        x=6.5,
+        line_dash="dash",
+        line_color=colors['success'],
+        annotation_text="Ngưỡng thành công: 6.5",
+        annotation_position="top right",
+        annotation_font_color=colors['success']
+    )
     visualizations['vote_dist'] = fig_vote.to_html(full_html=False, config={'displayModeBar': False})
 
-    # 3. Budget vs Revenue Scatter Plot - Enhanced
+    # 3. Budget vs Revenue Scatter Plot - Enhanced with annotations
     fig_scatter = px.scatter(
         df, x='Budget', y='Revenue',
-        title='Mối quan hệ giữa Ngân sách và Doanh thu',
+        title=f'Mối quan hệ giữa Ngân sách và Doanh thu (n={len(df)})',
         labels={'Budget': 'Ngân sách (USD)', 'Revenue': 'Doanh thu (USD)'},
         color='Success',
         color_discrete_map={0: colors['danger'], 1: colors['success']},
         template='plotly_dark',
-        hover_data=['Title']
+        hover_data=['Title'],
+        size='Vote Average',
+        size_max=15
+    )
+    # Add break-even line (Revenue = Budget)
+    max_val = max(df['Budget'].max(), df['Revenue'].max())
+    fig_scatter.add_trace(
+        go.Scatter(
+            x=[0, max_val],
+            y=[0, max_val],
+            mode='lines',
+            line=dict(dash='dash', color=colors['info'], width=2),
+            name='Break-even (Revenue = Budget)',
+            showlegend=True
+        )
     )
     fig_scatter.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
@@ -121,21 +161,26 @@ def create_data_visualizations():
             bordercolor=colors['primary'],
             borderwidth=1
         ),
-        margin=dict(l=20, r=20, t=60, b=20)
-    )
-    fig_scatter.update_traces(
-        marker=dict(size=10, line=dict(width=1, color='white')),
-        opacity=0.8
+        margin=dict(l=20, r=20, t=60, b=20),
+        xaxis=dict(
+            gridcolor='rgba(255,255,255,0.1)',
+            tickformat='$,.0f'
+        ),
+        yaxis=dict(
+            gridcolor='rgba(255,255,255,0.1)',
+            tickformat='$,.0f'
+        )
     )
     visualizations['budget_revenue'] = fig_scatter.to_html(full_html=False, config={'displayModeBar': False})
 
-    # 4. Genre Distribution - Modern bar chart
-    genre_counts = df['Main_Genre'].value_counts().head(10)
+    # 4. Genre Distribution - Modern bar chart with more data
+    genre_counts = df['Main_Genre'].value_counts().head(15)
     fig_genre = px.bar(
         genre_counts,
-        title='Top 10 thể loại phim phổ biến',
+        title=f'Top 15 thể loại phim phổ biến (n={len(df)})',
         labels={'value': 'Số lượng phim', 'index': 'Thể loại'},
-        color_discrete_sequence=[colors['info']],
+        color=genre_counts.values,
+        color_continuous_scale='purples',
         template='plotly_dark'
     )
     fig_genre.update_layout(
@@ -145,16 +190,21 @@ def create_data_visualizations():
         title_font_color=colors['info'],
         title_font_size=20,
         showlegend=False,
-        margin=dict(l=20, r=20, t=60, b=20)
+        margin=dict(l=20, r=20, t=60, b=20),
+        xaxis=dict(gridcolor='rgba(255,255,255,0.1)'),
+        yaxis=dict(gridcolor='rgba(255,255,255,0.1)')
     )
     fig_genre.update_traces(
         marker_line_color=colors['secondary'],
         marker_line_width=1,
-        opacity=0.8
+        opacity=0.8,
+        text=genre_counts.values,
+        textposition='outside'
     )
+    fig_genre.update_coloraxes(showscale=False)
     visualizations['genre_dist'] = fig_genre.to_html(full_html=False, config={'displayModeBar': False})
 
-    # 5. Yearly Trends - Enhanced dual axis
+    # 5. Yearly Trends - Enhanced dual axis with annotations
     yearly_success = df.groupby('Year')['Success'].agg(['count', 'mean']).reset_index()
     yearly_success = yearly_success[yearly_success['count'] >= 2]  # At least 2 movies per year
 
@@ -166,7 +216,9 @@ def create_data_visualizations():
             y=yearly_success['count'],
             name="Số lượng phim",
             marker_color=colors['primary'],
-            opacity=0.8
+            opacity=0.8,
+            text=yearly_success['count'],
+            textposition='outside'
         ),
         secondary_y=False,
     )
@@ -179,13 +231,15 @@ def create_data_visualizations():
             mode='lines+markers',
             marker_color=colors['success'],
             line=dict(width=3, color=colors['success']),
-            marker=dict(size=8, line=dict(width=2, color='white'))
+            marker=dict(size=10, line=dict(width=2, color='white')),
+            text=[f"{v:.1f}%" for v in yearly_success['mean']*100],
+            textposition='top center'
         ),
         secondary_y=True,
     )
 
     fig_yearly.update_layout(
-        title_text="Xu hướng sản xuất phim và tỷ lệ thành công theo năm",
+        title_text=f"Xu hướng sản xuất phim và tỷ lệ thành công theo năm (n={len(df)})",
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         font_color=colors['text'],
@@ -194,9 +248,12 @@ def create_data_visualizations():
         legend=dict(
             bgcolor='rgba(18, 18, 28, 0.8)',
             bordercolor=colors['primary'],
-            borderwidth=1
+            borderwidth=1,
+            x=0.01,
+            y=0.99
         ),
-        margin=dict(l=20, r=20, t=60, b=20)
+        margin=dict(l=20, r=20, t=60, b=20),
+        hovermode='x unified'
     )
     fig_yearly.update_xaxes(title_text="Năm phát hành", gridcolor='rgba(255,255,255,0.1)')
     fig_yearly.update_yaxes(title_text="Số lượng phim", secondary_y=False, gridcolor='rgba(255,255,255,0.1)')
@@ -297,13 +354,19 @@ def create_data_visualizations():
     # Dataset statistics
     stats = {
         'total_movies': len(df),
+        'total_raw_movies': 2193,  # Total movies in raw dataset
+        'removed_movies': 2193 - len(df),
+        'removal_percentage': ((2193 - len(df)) / 2193) * 100,
         'success_rate': df['Success'].mean() * 100,
         'avg_budget': df['Budget'].mean(),
         'avg_revenue': df['Revenue'].mean(),
+        'avg_roi': df['ROI'].mean(),
         'avg_vote': df['Vote Average'].mean(),
         'avg_runtime': df['Runtime'].mean(),
         'genres_count': df['Main_Genre'].nunique(),
-        'year_range': f"{df['Year'].min()} - {df['Year'].max()}"
+        'year_range': f"{int(df['Year'].min())} - {int(df['Year'].max())}",
+        'movies_with_profit': len(df[df['ROI'] >= 1]),
+        'movies_with_loss': len(df[df['ROI'] < 1])
     }
 
     return visualizations, stats

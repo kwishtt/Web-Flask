@@ -157,7 +157,7 @@ def prepare_input_data(form_data):
             'Runtime': float(form_data.get('runtime', 120)),
             'Vote Average': float(form_data.get('vote_average', 5)),
             'Vote Count': float(form_data.get('vote_count', 100)),
-            'Release Date': f"{form_data.get('release_year', 2024)}-{form_data.get('release_month', 1):02d}-15"
+            'Release Date': f"{int(form_data.get('release_year', 2024))}-{int(form_data.get('release_month', 1)):02d}-15"
         }
         
         # Thêm categorical features nếu có

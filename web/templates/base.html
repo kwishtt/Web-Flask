@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ config.get('VERSION', '1.0') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=4.1" />
     <script defer src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     {% block head %}{% endblock %}
 </head>
@@ -17,7 +17,7 @@
         <div class="container header-inner">
             <a href="{{ url_for('home') }}" class="logo">Movie Success Predictor <span>AI-powered</span></a>
             <nav class="primary-nav" aria-label="Điều hướng chính">
-                <a href="#about">Giới thiệu</a>
+                <a href="#">Home</a>
                 <a href="#predict">Dự đoán</a>
                 <a href="#features">Tính năng</a>
             </nav>
@@ -49,13 +49,14 @@
                 <p>Công cụ phân tích dựa trên machine learning để dự đoán tiềm năng của bộ phim.</p>
             </div>
             <div class="footer-links">
-                <a href="#about">Giới thiệu</a>
+                <a href="#">Home</a>
                 <a href="#predict">Dự đoán</a>
                 <a href="#features">Tính năng</a>
             </div>
             <div class="footer-meta">
                 <p>&copy; 2025 Movie Success Predictor. Dự đoán thông minh.</p>
-            </div>
+                <p>Được phát triển bởi Nhóm 4 - Khoa CNTT, Đại học Mỏ - Địa chất Hà Nội</p>
+                <p>Mã nguồn mở trên <a href="https://github.com/kwishtt/Web-Flask" target="_blank">GitHub</a></p>
         </div>
     </footer>
 

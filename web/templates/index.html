@@ -9,6 +9,12 @@
             <p class="eyebrow">🚀 HUMG Education - Movie Analytics</p>
             <h1>Dự đoán độ thành công của phim</h1>
             <p class="lead">Sử dụng machine learning tiên tiến để phân tích và dự đoán tiềm năng thành công của bộ phim dựa trên ngân sách, diễn viên, đạo diễn và các yếu tố quan trọng khác.</p>
+            
+            <div class="hero-cta">
+                <a class="btn" href="#predict">Bắt đầu dự đoán</a>
+                <a class="btn-outline" href="{{ url_for('data_analysis') }}">Xem phân tích dữ liệu</a>
+            </div>
+            
             <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="stat-number">95%</span>
@@ -18,10 +24,6 @@
                     <span class="stat-number">2000+</span>
                     <span class="stat-label">Dữ liệu phân tích</span>
                 </div>
-            </div>
-            <div class="hero-cta">
-                <a class="btn" href="#predict">Bắt đầu dự đoán</a>
-                <a class="btn-outline" href="{{ url_for('data_analysis') }}">Xem phân tích dữ liệu</a>
             </div>
         </div>
         <div class="hero-visual" role="presentation">
@@ -74,27 +76,6 @@
     </div>
 </section>
 
-<section class="about" id="about">
-    <div class="container section-header">
-        <p class="eyebrow">Công nghệ tiên tiến</p>
-        <h2>Cách hoạt động của hệ thống dự đoán</h2>
-        <p>Hệ thống sử dụng Random Forest algorithm được train trên dataset phim lớn để phân tích các yếu tố ảnh hưởng đến thành công.</p>
-    </div>
-    <div class="container about-grid">
-        <div class="about-card">
-            <h3>Thu thập dữ liệu</h3>
-            <p>Dataset bao gồm thông tin về ngân sách, thể loại, rating của diễn viên và đạo diễn, thời lượng phim, và kết quả thực tế.</p>
-        </div>
-        <div class="about-card">
-            <h3>Train mô hình AI</h3>
-            <p>Sử dụng machine learning để học mối quan hệ giữa các yếu tố đầu vào và độ thành công của phim.</p>
-        </div>
-        <div class="about-card">
-            <h3>Dự đoán real-time</h3>
-            <p>Nhập thông tin phim và nhận dự đoán ngay lập tức với độ chính xác cao.</p>
-        </div>
-    </div>
-</section>
 
 <section class="features" id="features">
     <div class="container section-header">
