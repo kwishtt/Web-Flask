@@ -1,0 +1,119 @@
+# ==============================================
+# CẤU HÌNH ML PIPELINE - DỰ ĐOÁN THÀNH CÔNG PHIM
+# ==============================================
+
+# Đường dẫn dữ liệu
+data:
+  path: "./data/Movies.csv"
+  output_dir: "./data/processed"
+  sample_size: null  # null = sử dụng toàn bộ dữ liệu
+
+# Random seed cho reproducibility
+random_state: 42
+
+# Preprocessing
+preprocessing:
+  # Ngưỡng ROI cho target
+  roi_threshold: 1.0
+  vote_average_threshold: 6.5
+  
+  # Xử lý missing values
+  drop_if_missing_ratio: 0.3  # Nếu >30% missing thì impute thay vì drop
+  imputation_strategy: "median"  # median, mean, most_frequent
+  
+  # Feature engineering
+  text_features:
+    use_tfidf: true
+    max_features: 2000
+    svd_components: 50
+  
+  categorical_encoding:
+    method: "onehot"  # onehot, target, count
+    top_k_for_high_cardinality: 10
+  
+  scaling:
+    method: "minmax"  # minmax, standard
+  
+  # Train/test split
+  test_size: 0.2
+  stratify: true
+
+# Mô hình cần train
+models:
+  logistic_regression:
+    enabled: true
+    params:
+      max_iter: 500
+      solver: "saga"
+      class_weight: "balanced"
+    param_grid:
+      C: [0.01, 0.1, 1, 10]
+      penalty: ["l2"]
+  
+  random_forest:
+    enabled: true
+    params:
+      class_weight: "balanced"
+      n_jobs: -1
+    param_grid:
+      n_estimators: [100, 300, 500]
+      max_depth: [null, 6, 12, 20]
+      min_samples_leaf: [1, 2, 5]
+      max_features: ["sqrt", 0.5]
+  
+  xgboost:
+    enabled: true
+    params:
+      objective: "binary:logistic"
+      eval_metric: "logloss"
+      use_label_encoder: false
+    param_grid:
+      n_estimators: [100, 300, 500]
+      max_depth: [3, 6, 10]
+      learning_rate: [0.01, 0.05, 0.1]
+      subsample: [0.6, 0.8, 1.0]
+      colsample_bytree: [0.6, 0.8, 1.0]
+  
+  lightgbm:
+    enabled: true
+    params:
+      objective: "binary"
+      metric: "binary_logloss"
+      verbosity: -1
+    param_grid:
+      n_estimators: [100, 300, 500]
+      num_leaves: [31, 50, 100]
+      max_depth: [3, 6, 10]
+      learning_rate: [0.01, 0.05, 0.1]
+      subsample: [0.6, 0.8, 1.0]
+
+# Hyperparameter tuning
+tuning:
+  method: "grid"  # grid, random, optuna
+  cv_folds: 5
+  scoring: "f1"  # f1, precision, recall, roc_auc
+  n_iter: 50  # Cho RandomizedSearchCV
+  n_trials: 100  # Cho Optuna
+
+# Xử lý imbalance
+imbalance:
+  method: "smote"  # smote, class_weight, both, none
+  sampling_strategy: "auto"
+
+# Threshold optimization
+threshold_optimization:
+  enabled: true
+  metric: "f1"  # f1, precision, recall
+  range: [0.1, 0.9]
+  step: 0.05
+
+# Output paths
+output:
+  models_dir: "./models"
+  reports_dir: "./reports"
+  plots_dir: "./reports/plots"
+  
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

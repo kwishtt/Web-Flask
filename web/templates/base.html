@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Kim Da-mi Là Vợ Tao{% endblock %}</title>
-    <meta name="description" content="Cộng đồng fan Kim Da-mi tại Việt Nam: cập nhật tin tức, vai diễn, sự kiện và những câu chuyện truyền cảm hứng." />
+    <title>{% block title %}Dự đoán độ thành công phim{% endblock %}</title>
+    <meta name="description" content="Công cụ dự đoán độ thành công của phim dựa trên machine learning. Phân tích ngân sách, diễn viên, đạo diễn và các yếu tố khác." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,15 +15,11 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <a href="{{ url_for('home') }}" class="logo">Kim Da-mi <span>Tình đầu của tao</span></a>
+            <a href="{{ url_for('home') }}" class="logo">Movie Success Predictor <span>AI-powered</span></a>
             <nav class="primary-nav" aria-label="Điều hướng chính">
-                <a href="#bio">Tiểu sử</a>
-                <a href="#services">Điểm nhấn</a>
-                <a href="#projects">Vai diễn</a>
-                <a href="#gallery">Hình ảnh</a>
-                <a href="#process">Fandom</a>
-                <a href="#journal">Tin mới</a>
-                <a href="#contact" class="btn btn-sm">Cùng tham gia</a>
+                <a href="#about">Giới thiệu</a>
+                <a href="#predict">Dự đoán</a>
+                <a href="#features">Tính năng</a>
             </nav>
             <button class="nav-toggle" aria-label="Mở hoặc đóng điều hướng"><span></span><span></span><span></span></button>
         </div>
@@ -49,24 +45,16 @@
     <footer class="site-footer" id="footer">
         <div class="container footer-grid">
             <div>
-                <h2>Lan tỏa tình yêu dành cho Kim Da-mi.</h2>
-                <p>Nơi kết nối fan Việt và quốc tế, lưu giữ kỷ niệm đẹp và cổ vũ Da-mi trong mọi chặng đường.</p>
+                <h2>Dự đoán thành công phim với AI</h2>
+                <p>Công cụ phân tích dựa trên machine learning để dự đoán tiềm năng của bộ phim.</p>
             </div>
             <div class="footer-links">
-                <a href="#bio">Tiểu sử</a>
-                <a href="#services">Điểm nhấn</a>
-                <a href="#projects">Vai diễn</a>
-                <a href="#gallery">Hình ảnh</a>
-                <a href="#process">Fandom</a>
-                <a href="#contact">Kết nối</a>
+                <a href="#about">Giới thiệu</a>
+                <a href="#predict">Dự đoán</a>
+                <a href="#features">Tính năng</a>
             </div>
             <div class="footer-meta">
-                <p>&copy; {{ now.year }} Kim Da-mi Universe. Tỏa sáng cùng Da-mi.</p>
-                <div class="socials">
-                    <a href="#" aria-label="Dribbble">Dribbble</a>
-                    <a href="#" aria-label="Behance">Behance</a>
-                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                </div>
+                <p>&copy; 2025 Movie Success Predictor. Dự đoán thông minh.</p>
             </div>
         </div>
     </footer>

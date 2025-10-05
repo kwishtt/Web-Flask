@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Phân tích dữ liệu phim - Movie Data Analytics{% endblock %}
+
+{% block content %}
+<section class="data-header">
+    <div class="container section-header">
+        <p class="eyebrow">Data Analytics</p>
+        <h1>Phân tích dữ liệu phim Việt Nam</h1>
+        <p>Khám phá insights từ dataset {{ stats.total_movies }} bộ phim Việt Nam thông qua biểu đồ trực quan</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.total_movies }}</span>
+                <span class="stat-label">Tổng số phim</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ "%.1f"|format(stats.success_rate) }}%</span>
+                <span class="stat-label">Tỷ lệ thành công</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">${{ "{:,.0f}".format(stats.avg_budget) }}</span>
+                <span class="stat-label">Ngân sách TB</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ "%.1f"|format(stats.avg_vote) }}</span>
+                <span class="stat-label">Điểm TB</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="data-visualizations">
+    <div class="container">
+        <div class="chart-grid">
+            <!-- Budget Distribution -->
+            <div class="chart-card">
+                <h3>📊 Phân bố ngân sách sản xuất</h3>
+                <div class="chart-container">
+                    {{ budget_dist|safe }}
+                </div>
+                <p class="chart-description">
+                    Hầu hết các phim có ngân sách dưới 10 triệu USD, với một số phim có ngân sách lớn hơn đáng kể.
+                </p>
+            </div>
+
+            <!-- Vote Average Distribution -->
+            <div class="chart-card">
+                <h3>⭐ Phân bố điểm đánh giá</h3>
+                <div class="chart-container">
+                    {{ vote_dist|safe }}
+                </div>
+                <p class="chart-description">
+                    Điểm đánh giá tập trung chủ yếu từ 5.5 đến 7.5, cho thấy chất lượng phim khá đồng đều.
+                </p>
+            </div>
+
+            <!-- Budget vs Revenue Scatter -->
+            <div class="chart-card chart-full">
+                <h3>💰 Mối quan hệ Ngân sách - Doanh thu</h3>
+                <div class="chart-container">
+                    {{ budget_revenue|safe }}
+                </div>
+                <p class="chart-description">
+                    Màu xanh lá: Phim thành công (ROI ≥1 & Vote ≥6.5), Màu đỏ: Phim không thành công.
+                    Các điểm ở trên đường chéo cho thấy phim có lãi.
+                </p>
+            </div>
+
+            <!-- Genre Distribution -->
+            <div class="chart-card">
+                <h3>🎭 Thể loại phim phổ biến</h3>
+                <div class="chart-container">
+                    {{ genre_dist|safe }}
+                </div>
+                <p class="chart-description">
+                    Drama là thể loại phổ biến nhất, theo sau bởi Comedy và Romance.
+                </p>
+            </div>
+
+            <!-- Runtime Distribution -->
+            <div class="chart-card">
+                <h3>⏱️ Phân bố thời lượng phim</h3>
+                <div class="chart-container">
+                    {{ runtime_dist|safe }}
+                </div>
+                <p class="chart-description">
+                    Hầu hết các phim có thời lượng từ 90-120 phút, phù hợp với định dạng phim truyện.
+                </p>
+            </div>
+
+            <!-- Yearly Trends -->
+            <div class="chart-card chart-full">
+                <h3>📈 Xu hướng sản xuất và thành công theo năm</h3>
+                <div class="chart-container">
+                    {{ yearly_trend|safe }}
+                </div>
+                <p class="chart-description">
+                    Số lượng phim sản xuất và tỷ lệ thành công thay đổi theo thời gian. Dữ liệu từ {{ stats.year_range }}.
+                </p>
+            </div>
+
+            <!-- Vote Analysis -->
+            <div class="chart-card chart-full">
+                <h3>📊 Phân tích đánh giá chi tiết</h3>
+                <div class="chart-container">
+                    {{ vote_analysis|safe }}
+                </div>
+                <p class="chart-description">
+                    Mối quan hệ giữa số lượng người đánh giá và điểm trung bình. Phim thành công thường có nhiều đánh giá hơn.
+                </p>
+            </div>
+
+            <!-- ROI Distribution -->
+            <div class="chart-card chart-full">
+                <h3>💸 Phân bố tỷ suất lợi nhuận (ROI)</h3>
+                <div class="chart-container">
+                    {{ roi_dist|safe }}
+                </div>
+                <p class="chart-description">
+                    ROI âm (< 0%) = thua lỗ, ROI dương (> 0%) = lãi. Đường đứt nét đỏ là điểm hòa vốn.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="data-insights">
+    <div class="container">
+        <h2>🔍 Insights chính từ dữ liệu</h2>
+        <div class="insights-grid">
+            <div class="insight-card">
+                <h4>🎯 Yếu tố quyết định thành công</h4>
+                <ul>
+                    <li>Ngân sách hợp lý (không quá cao hoặc quá thấp)</li>
+                    <li>Điểm đánh giá trên 6.5</li>
+                    <li>Thời lượng phim 90-120 phút</li>
+                    <li>Thể loại Drama và Comedy được ưa chuộng</li>
+                </ul>
+            </div>
+            <div class="insight-card">
+                <h4>📊 Thống kê tổng quan</h4>
+                <ul>
+                    <li>{{ stats.genres_count }} thể loại phim khác nhau</li>
+                    <li>Doanh thu trung bình: ${{ "{:,.0f}".format(stats.avg_revenue) }}</li>
+                    <li>Thời lượng trung bình: {{ "%.0f"|format(stats.avg_runtime) }} phút</li>
+                    <li>Dữ liệu từ năm {{ stats.year_range.split(' - ')[0] }} đến {{ stats.year_range.split(' - ')[1] }}</li>
+                </ul>
+            </div>
+            <div class="insight-card">
+                <h4>💡 Khuyến nghị cho nhà sản xuất</h4>
+                <ul>
+                    <li>Tập trung vào chất lượng nội dung hơn ngân sách</li>
+                    <li>Chọn thời điểm phát hành phù hợp</li>
+                    <li>Đầu tư marketing để tăng vote count</li>
+                    <li>Học hỏi từ các phim thành công trong dataset</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="data-actions">
+    <div class="container">
+        <div class="actions-grid">
+            <a href="{{ url_for('home') }}" class="btn">Dự đoán phim mới</a>
+            <a href="#data-header" class="btn-outline">Xem lại biểu đồ</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

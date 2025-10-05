@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Kết quả dự đoán - {{ title }}{% endblock %}
+
+{% block content %}
+<section class="result">
+    <div class="container result-grid">
+        <div class="result-summary">
+            <h1>Kết quả dự đoán cho phim "{{ title }}"</h1>
+            <div class="prediction-score">
+                <div class="score-circle score-{{ color }}">
+                    <span class="score-number">{{ confidence }}%</span>
+                    <span class="score-label">Confidence</span>
+                </div>
+                <div class="score-info">
+                    <h2 class="level-{{ color }}">{{ prediction }}</h2>
+                    <p>Mô hình AI dự đoán phim này sẽ {{ prediction.lower() }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-details">
+            <h3>Thông tin chi tiết</h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Ngân sách sản xuất</span>
+                    <span class="detail-value">${{ "{:,.0f}".format(budget) }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Thể loại</span>
+                    <span class="detail-value">{{ genre }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Đánh giá trung bình</span>
+                    <span class="detail-value">{{ vote_average }}/10</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Số lượng đánh giá</span>
+                    <span class="detail-value">{{ "{:,.0f}".format(vote_count) }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Thời lượng</span>
+                    <span class="detail-value">{{ runtime }} phút</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Năm phát hành</span>
+                    <span class="detail-value">{{ release_year }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Tháng phát hành</span>
+                    <span class="detail-value">{{ release_month }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Quốc gia sản xuất</span>
+                    <span class="detail-value">{{ country }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-actions">
+            <a href="{{ url_for('home') }}" class="btn">Dự đoán phim khác</a>
+            <a href="{{ url_for('data_analysis') }}" class="btn-outline">Xem phân tích dữ liệu</a>
+        </div>
+
+        <div class="result-explanation">
+            <h3>Giải thích dự đoán</h3>
+            <p>Dự đoán này được tính dựa trên mô hình Random Forest được train với:</p>
+            <ul>
+                <li><strong>Ngân sách & Thời lượng:</strong> Yếu tố kinh tế quan trọng</li>
+                <li><strong>Đánh giá & Số lượng vote:</strong> Chất lượng nội dung</li>
+                <li><strong>Thời gian phát hành:</strong> Yếu tố thời vụ</li>
+                <li><strong>Thể loại & Quốc gia:</strong> Sở thích thị trường</li>
+            </ul>
+            <p class="note">* Dự đoán dựa trên phân tích 63 bộ phim Việt Nam, độ chính xác cao với F1-Score > 0.8 trong cross-validation.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Dự đoán độ thành công phim - AI Movie Predictor{% endblock %}
+
+{% block content %}
+<section class="hero" id="top">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <p class="eyebrow">🚀 AI-Powered Movie Analytics</p>
+            <h1>Dự đoán độ thành công của phim</h1>
+            <p class="lead">Sử dụng machine learning tiên tiến để phân tích và dự đoán tiềm năng thành công của bộ phim dựa trên ngân sách, diễn viên, đạo diễn và các yếu tố quan trọng khác.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-number">85%</span>
+                    <span class="stat-label">Độ chính xác</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">63</span>
+                    <span class="stat-label">Bộ phim phân tích</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Biểu đồ insights</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a class="btn" href="#predict">Bắt đầu dự đoán</a>
+                <a class="btn-outline" href="{{ url_for('data_analysis') }}">Xem phân tích dữ liệu</a>
+            </div>
+        </div>
+        <div class="hero-visual" role="presentation">
+            <div class="glass-card gradient-border">
+                <h3>🎬 Phân tích chuyên sâu</h3>
+                <p>Mô hình AI được train trên dữ liệu phim thực tế để đưa ra dự đoán chính xác.</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span>Random Forest Classifier</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <span>8 biểu đồ tương tác</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span>Dự đoán tức thời</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎲</span>
+                        <span>Tạo dữ liệu ngẫu nhiên</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-bg-pattern">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container section-header">
+        <p class="eyebrow">Công nghệ tiên tiến</p>
+        <h2>Cách hoạt động của hệ thống dự đoán</h2>
+        <p>Hệ thống sử dụng Random Forest algorithm được train trên dataset phim lớn để phân tích các yếu tố ảnh hưởng đến thành công.</p>
+    </div>
+    <div class="container about-grid">
+        <div class="about-card">
+            <h3>Thu thập dữ liệu</h3>
+            <p>Dataset bao gồm thông tin về ngân sách, thể loại, rating của diễn viên và đạo diễn, thời lượng phim, và kết quả thực tế.</p>
+        </div>
+        <div class="about-card">
+            <h3>Train mô hình AI</h3>
+            <p>Sử dụng machine learning để học mối quan hệ giữa các yếu tố đầu vào và độ thành công của phim.</p>
+        </div>
+        <div class="about-card">
+            <h3>Dự đoán real-time</h3>
+            <p>Nhập thông tin phim và nhận dự đoán ngay lập tức với độ chính xác cao.</p>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="container section-header">
+        <p class="eyebrow">Tính năng nổi bật</p>
+        <h2>Tại sao nên sử dụng công cụ này?</h2>
+    </div>
+    <div class="container feature-grid">
+        <article class="feature-card">
+            <span class="icon-pill"><iconify-icon icon="fluent:brain-20-regular" width="26" height="26"></iconify-icon></span>
+            <h3>AI Thông minh</h3>
+            <p>Mô hình machine learning tiên tiến phân tích hàng nghìn yếu tố để đưa ra dự đoán chính xác.</p>
+        </article>
+        <article class="feature-card">
+            <span class="icon-pill"><iconify-icon icon="fluent:flash-20-regular" width="26" height="26"></iconify-icon></span>
+            <h3>Nhanh chóng</h3>
+            <p>Dự đoán trong vài giây với giao diện đơn giản, dễ sử dụng cho mọi người.</p>
+        </article>
+        <article class="feature-card">
+            <span class="icon-pill"><iconify-icon icon="fluent:data-pie-20-regular" width="26" height="26"></iconify-icon></span>
+            <h3>Dữ liệu phong phú</h3>
+            <p>Phân tích chi tiết các yếu tố như ngân sách, diễn viên, đạo diễn, thể loại và marketing.</p>
+        </article>
+        <article class="feature-card">
+            <span class="icon-pill"><iconify-icon icon="fluent:analytics-20-regular" width="26" height="26"></iconify-icon></span>
+            <h3>Phân tích trực quan</h3>
+            <p>Khám phá insights từ dữ liệu phim qua biểu đồ tương tác và thống kê chi tiết.</p>
+        </article>
+    </div>
+</section>
+
+<section class="predict" id="predict">
+    <div class="container predict-grid">
+        <div>
+            <p class="eyebrow">Bắt đầu dự đoán</p>
+            <h2>Nhập thông tin phim của bạn</h2>
+            <p>Điền đầy đủ thông tin để nhận dự đoán độ thành công từ AI. Tất cả dữ liệu được xử lý an toàn.</p>
+        </div>
+        <form class="predict-form" action="{{ url_for('predict') }}" method="post">
+            <div class="form-group">
+                <label for="title">Tên phim</label>
+                <input type="text" id="title" name="title" placeholder="Ví dụ: Avengers: Endgame" required />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="budget">Ngân sách sản xuất (USD)</label>
+                    <input type="number" id="budget" name="budget" placeholder="356000000" min="1000" required />
+                </div>
+                <div class="form-group">
+                    <label for="genre">Thể loại</label>
+                    <select id="genre" name="genre" required>
+                        {% for genre in genres %}
+                        <option value="{{ genre }}">{{ genre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="director_rating">Đánh giá trung bình (Vote Average)</label>
+                    <input type="number" id="director_rating" name="director_rating" placeholder="7.5" min="0" max="10" step="0.1" required />
+                </div>
+                <div class="form-group">
+                    <label for="actor_rating">Số lượng đánh giá (Vote Count)</label>
+                    <input type="number" id="actor_rating" name="actor_rating" placeholder="1000" min="1" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="runtime">Thời lượng (phút)</label>
+                    <input type="number" id="runtime" name="runtime" placeholder="120" min="30" max="300" required />
+                </div>
+                <div class="form-group">
+                    <label for="release_year">Năm phát hành</label>
+                    <input type="number" id="release_year" name="release_year" placeholder="2024" min="1900" max="2030" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="release_month">Tháng phát hành</label>
+                    <select id="release_month" name="release_month" required>
+                        {% for i in range(1, 13) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="country">Quốc gia sản xuất</label>
+                    <select id="country" name="country" required>
+                        {% for country in countries %}
+                        <option value="{{ country }}">{{ country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">Dự đoán ngay</button>
+                <button class="btn-outline" type="button" id="randomBtn">🎲 Tạo dữ liệu ngẫu nhiên</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
