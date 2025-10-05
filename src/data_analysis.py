@@ -23,7 +23,7 @@ def create_data_visualizations():
     }
 
     # Load data
-    data_path = os.path.join(os.path.dirname(__file__), '..', 'Data', 'Movies.csv')
+    data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'Movies.csv')
     df = pd.read_csv(data_path)
 
     # Filter Vietnamese movies

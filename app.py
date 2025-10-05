@@ -314,9 +314,9 @@ def predict():
                              genre=form_data['genre'],
                              vote_average=vote_average,
                              vote_count=int(vote_count),  # Pass số nguyên
-                             runtime=runtime,
-                             release_year=form_data['release_year'],
-                             release_month=form_data['release_month'],
+                             runtime=int(runtime),  # Convert to int
+                             release_year=int(form_data['release_year']),  # Convert to int
+                             release_month=int(form_data['release_month']),  # Convert to int
                              country=form_data['country'],
                              model_name=MODEL_NAME,
                              threshold=round(BEST_THRESHOLD * 100, 1))
