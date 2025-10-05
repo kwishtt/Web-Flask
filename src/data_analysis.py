@@ -26,8 +26,8 @@ def create_data_visualizations():
     data_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'Movies.csv')
     df = pd.read_csv(data_path)
 
-    # Filter Vietnamese movies
-    df = df[df['Production Countries'].str.contains('Vietnam', na=False, case=False)]
+    # Filter Vietnamese movies - COMMENTED OUT to show ALL movies
+    # df = df[df['Production Countries'].str.contains('Vietnam', na=False, case=False)]
 
     # Clean data
     df = df.dropna(subset=['Revenue', 'Budget', 'Runtime', 'Vote Average'])
