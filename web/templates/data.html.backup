@@ -2,7 +2,17 @@
 
 {% block title %}Phân tích dữ liệu phim - Movie Data Analytics{% endblock %}
 
-{% block content %}
+{% b            <!--            <!-- Feature Importance -->
+            <div class="chart-card chart-full">
+                <h3>🔍 Độ quan trọng của các yếu tố</h3>
+                <div class="chart-container">
+                    <img src="{{ url_for('static', filename='images/charts/shap_summary_xgboost.png') }}" alt="SHAP Summary" style="width: 100%; height: auto; border-radius: 8px;">
+                </div>urve -->
+            <div class="chart-card">
+                <h3>📈 Đường cong ROC</h3>
+                <div class="chart-container">
+                    <img src="{{ url_for('static', filename='images/charts/roc_curve_xgboost.png') }}" alt="ROC Curve" style="width: 100%; height: auto; border-radius: 8px;">
+                </div>ontent %}
 <section class="data-header">
     <div class="container section-header">
         <p class="eyebrow">Data Analytics</p>
@@ -109,9 +119,9 @@
 
             <!-- ROC Curve -->
             <div class="chart-card">
-                <h3>📈 Đường cong ROC</h3>
+                <h3>� Đường cong ROC</h3>
                 <div class="chart-container">
-                    <img src="{{ url_for('static', filename='images/charts/roc_curve_xgboost.png') }}" alt="ROC Curve" style="width: 100%; height: auto; border-radius: 8px;">
+                    <img src="{{ url_for('static', filename='../reports/plots/roc_curve_xgboost.png') }}" alt="ROC Curve" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
                     ROC curve với AUC cao cho thấy model phân biệt tốt giữa phim thành công và thất bại.
@@ -120,9 +130,9 @@
 
             <!-- Feature Importance -->
             <div class="chart-card chart-full">
-                <h3>🔍 Độ quan trọng của các yếu tố</h3>
+                <h3>� Độ quan trọng của các yếu tố</h3>
                 <div class="chart-container">
-                    <img src="{{ url_for('static', filename='images/charts/shap_summary_xgboost.png') }}" alt="SHAP Summary" style="width: 100%; height: auto; border-radius: 8px;">
+                    <img src="{{ url_for('static', filename='../reports/plots/shap_summary_xgboost.png') }}" alt="SHAP Summary" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
                     Biểu đồ SHAP cho thấy Vote Average và Vote Count là 2 yếu tố quan trọng nhất quyết định thành công của phim.

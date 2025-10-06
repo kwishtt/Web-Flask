@@ -114,10 +114,38 @@ def engineer_features(df):
     
     # 2. ROI (nếu có Revenue)
     if 'Budget' in df.columns and 'Revenue' in df.columns:
+        # If Revenue is 0 (prediction case), estimate reasonable Revenue
+        if df['Revenue'].iloc[0] == 0 and 'Vote Average' in df.columns and 'Vote Count' in df.columns:
+            # Estimate Revenue based on Budget, Vote Average, and Vote Count
+            budget = df['Budget'].iloc[0]
+            vote_avg = df['Vote Average'].iloc[0]
+            vote_count = df['Vote Count'].iloc[0]
+            
+            # Base multiplier from budget (larger budgets tend to have higher ROI potential)
+            budget_multiplier = 1.5 + (min(budget / 100_000_000, 2.0) * 0.5)  # 1.5x to 2.5x
+            
+            # Quality multiplier from ratings (higher ratings = higher revenue)
+            quality_multiplier = max(0.5, min(vote_avg / 10.0, 1.0))  # 0.5x to 1.0x
+            
+            # Popularity multiplier from vote count (more votes = more awareness)
+            popularity_multiplier = 1.0 + min(np.log1p(vote_count) / 15.0, 1.0)  # 1.0x to 2.0x
+            
+            # Estimate Revenue = Budget * combined multipliers
+            estimated_revenue = budget * budget_multiplier * quality_multiplier * popularity_multiplier
+            df['Revenue'] = estimated_revenue
+            logger.info(f"Estimated Revenue: ${estimated_revenue:,.0f} (Budget: ${budget:,.0f}, Multipliers: {budget_multiplier:.2f}x{quality_multiplier:.2f}x{popularity_multiplier:.2f})")
+        
         df['ROI'] = df['Revenue'] / (df['Budget'] + 1)
     elif 'Budget' in df.columns:
-        # Nếu không có Revenue, estimate ROI = 1.0 (break-even)
-        df['ROI'] = 1.0
+        # Fallback: estimate ROI based on Vote Average (higher rating = higher ROI)
+        if 'Vote Average' in df.columns:
+            vote_avg = df['Vote Average'].iloc[0]
+            # ROI ranges from 0.8 (poor) to 3.0 (excellent)
+            estimated_roi = 0.8 + (max(0, vote_avg - 5.0) / 5.0) * 2.2  # 5.0 vote = 0.8 ROI, 10.0 vote = 3.0 ROI
+            df['ROI'] = estimated_roi
+            logger.info(f"Estimated ROI: {estimated_roi:.2f} based on Vote Average: {vote_avg}")
+        else:
+            df['ROI'] = 1.5  # Default to moderate success
     
     # 3. Log transforms
     if 'Budget' in df.columns:
@@ -147,6 +175,20 @@ def engineer_features(df):
         else:
             df[f'is_missing_{col_name}'] = 1  # Set to 1 if column doesn't exist
     
+    # 6. Add missing engineered features that might be expected by model
+    if 'is_holiday_release' not in df.columns:
+        # Holiday release flag already added in date features section above
+        pass  # Already handled
+    
+    # Ensure all numeric columns are float type for model compatibility
+    numeric_cols = ['Budget', 'Revenue', 'Runtime', 'Vote Average', 'Vote Count', 'ROI', 
+                   'release_year', 'release_month', 'release_weekday', 'release_season',
+                   'vote_count_log', 'budget_vote_interaction', 'budget_per_minute']
+    
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+    
     return df
 
 # ==========================================
@@ -154,41 +196,68 @@ def engineer_features(df):
 # ==========================================
 def prepare_input_data(form_data):
     """
-    Chuẩn bị input data từ form để dự đoán
+    Chuẩn bị input data từ form để dự đoán - FIXED để match training format
     """
     if USE_NEW_MODEL:
-        # Sử dụng feature engineering cho mô hình mới
+        # Sử dụng feature engineering cho mô hình mới - EXACTLY 27 features
         data = {
-            # Required original columns
+            # Original columns (some unused by model but needed for completeness)
             'Id': 0,
             'Original Title': form_data.get('title', 'Unknown'),
             'Original Language': 'en',
-            'Revenue': 0,  # Will be predicted
+            
+            # CORE FEATURES that model actually uses
+            'Revenue': 0,  # Will be estimated in engineer_features
             'Budget': float(form_data.get('budget', 0)),
             'Runtime': float(form_data.get('runtime', 120)),
             'Vote Average': float(form_data.get('vote_average', 5)),
             'Vote Count': float(form_data.get('vote_count', 100)),
             'Release Date': f"{int(form_data.get('release_year', 2024))}-{int(form_data.get('release_month', 1)):02d}-15",
             
-            # Categorical features
-            'Genres': f"['{form_data.get('genre', 'Drama')}']",
-            'Production Companies': '[]',
-            'Production Countries': f"['{form_data.get('country', 'United States of America')}']",
-            'Spoken Languages': "['English']",
-            'Director': 'Unknown',
-            'Stars': 'Unknown',
+            # CATEGORICAL FEATURES - exactly as model expects
+            'Genres': f"['{form_data.get('genre', 'Drama')}']",  # Not used by model but keep for completeness
+            'Production Companies': '[]',  # Not used by model
+            'Production Countries': form_data.get('country', 'United States of America'),  # USED by model
+            'Spoken Languages': 'English',  # USED by model 
+            'Director': 'Unknown',  # Not used by model
+            'Stars': 'Unknown',  # Not used by model
             
-            # Will be calculated in engineer_features
+            # ROI will be calculated in engineer_features
             'ROI': 1.0  # Placeholder
         }
         
         # Tạo DataFrame
         df = pd.DataFrame([data])
         
-        # Feature engineering
+        # Feature engineering - this will add all needed engineered features
         df = engineer_features(df)
         
-        return df
+        # Debug: Check which columns are actually needed
+        expected_features = [
+            'Id', 'Original Title', 'Original Language', 'Revenue', 'Budget', 'Runtime', 
+            'Vote Average', 'Vote Count', 'Genres', 'Production Companies', 'Production Countries', 
+            'Spoken Languages', 'Director', 'Stars', 'ROI', 'release_year', 'release_month', 
+            'release_weekday', 'release_season', 'is_holiday_release', 'vote_count_log', 
+            'budget_vote_interaction', 'budget_per_minute', 'is_missing_budget', 
+            'is_missing_revenue', 'is_missing_runtime', 'is_missing_vote_average'
+        ]
+        
+        # Ensure all expected features exist
+        for feat in expected_features:
+            if feat not in df.columns:
+                if 'is_missing_' in feat:
+                    df[feat] = 0  # Set missing flags to 0 since we have the data
+                else:
+                    df[feat] = 0  # Default value for missing engineered features
+                    logger.warning(f"Missing feature {feat}, setting to 0")
+        
+        # Select only the expected features in correct order
+        df_final = df[expected_features]
+        
+        logger.info(f"Final input shape: {df_final.shape}")
+        logger.info(f"Features generated: {df_final.columns.tolist()}")
+        
+        return df_final
     else:
         # Mô hình cũ: sử dụng encoders và scaler có sẵn
         logger.info("Sử dụng preprocessing cũ...")

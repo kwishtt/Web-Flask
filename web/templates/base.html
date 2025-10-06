@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>{% block title %}Dự đoán độ thành công phim{% endblock %}</title>
     <meta name="description" content="Công cụ dự đoán độ thành công của phim dựa trên machine learning. Phân tích ngân sách, diễn viên, đạo diễn và các yếu tố khác." />
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.4" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.5" />
     <script defer src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
-    <div class="version-tag">v0.2</div>
+    <div class="version-tag">v0.3</div>
     <header class="site-header">
         <div class="container header-inner">
             <a href="{{ url_for('home') }}" class="logo">

@@ -1,0 +1,27 @@
+Id
+Original Title
+Original Language
+Revenue
+Budget
+Runtime
+Vote Average
+Vote Count
+Genres
+Production Companies
+Production Countries
+Spoken Languages
+Director
+Stars
+ROI
+release_year
+release_month
+release_weekday
+release_season
+is_holiday_release
+vote_count_log
+budget_vote_interaction
+budget_per_minute
+is_missing_budget
+is_missing_revenue
+is_missing_runtime
+is_missing_vote_average
