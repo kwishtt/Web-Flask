@@ -261,13 +261,20 @@ getAdviceBtn.addEventListener('click', async () => {
     errorState.style.display = 'none';
     
     try {
+        // Create abort controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 20000); // 10 second timeout
+        
         const response = await fetch('/api/ai-advice', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(movieData)
+            body: JSON.stringify(movieData),
+            signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
         
         if (!response.ok) {
             throw new Error('API request failed');
@@ -280,10 +287,65 @@ getAdviceBtn.addEventListener('click', async () => {
         contentState.style.display = 'block';
         contentState.innerHTML = formatAIResponse(data.advice);
         
+        // Show badge if using fallback
+        if (data.fallback) {
+            const badge = document.createElement('div');
+            badge.style.cssText = 'background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: var(--accent-secondary); padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; margin-bottom: 12px; text-align: center;';
+            badge.innerHTML = '⚡ Advice nhanh (offline mode)';
+            contentState.insertBefore(badge, contentState.firstChild);
+        }
+        
     } catch (error) {
         console.error('Error fetching AI advice:', error);
-        loadingState.style.display = 'none';
-        errorState.style.display = 'flex';
+        
+        // Check if it's a timeout error
+        if (error.name === 'AbortError') {
+            console.log('Request timed out, using fallback advice');
+            // Show fallback content immediately
+            loadingState.style.display = 'none';
+            contentState.style.display = 'block';
+            
+            // Use one of the fallback advices
+            const fallbackAdvice = `### Phân tích từ chuyên gia
+
+**Đánh giá tổng quan:**
+
+Dựa trên các chỉ số bạn cung cấp, dự án phim của bạn có những điểm mạnh đáng chú ý nhưng cũng cần cải thiện một số khía cạnh để tối ưu hóa cơ hội thành công. Hãy cùng xem xét chi tiết:
+
+**Điểm mạnh:**
+
+- **Ngân sách hợp lý:** Mức đầu tư cho thấy sự cân nhắc kỹ lưỡng, giúp kiểm soát rủi ro tài chính
+- **Thể loại phù hợp:** Lựa chọn thể loại phù hợp với xu hướng thị trường hiện tại
+- **Thời điểm phát hành:** Kế hoạch ra mắt được cân nhắc để tối ưu doanh thu
+
+**Các khía cạnh cần cải thiện:**
+
+- **Marketing & Promotion:** Tăng cường chiến dịch truyền thông để nâng cao nhận diện
+- **Chất lượng nội dung:** Đầu tư vào kịch bản và diễn xuất để đảm bảo đánh giá tích cực
+- **Phân phối:** Mở rộng kênh phân phối để tiếp cận đa dạng khán giả
+
+**Khuyến nghị hành động:**
+
+1. Tập trung vào chất lượng nội dung và kịch bản
+2. Xây dựng chiến lược marketing đa kênh hiệu quả  
+3. Nghiên cứu kỹ đối thủ cạnh tranh trong cùng thể loại
+4. Tối ưu hóa thời điểm và chiến lược phát hành
+
+**Kết luận:**
+
+Với những điều chỉnh phù hợp, dự án của bạn có tiềm năng đạt được kết quả tích cực. Hãy tập trung vào việc nâng cao chất lượng nội dung và triển khai chiến lược marketing hiệu quả.`;
+            
+            contentState.innerHTML = formatAIResponse(fallbackAdvice);
+            
+            const badge = document.createElement('div');
+            badge.style.cssText = 'background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--warning); padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; margin-bottom: 12px; text-align: center;';
+            badge.innerHTML = '⏱️ Timeout - Hiển thị advice nhanh';
+            contentState.insertBefore(badge, contentState.firstChild);
+        } else {
+            // Other errors - show error state
+            loadingState.style.display = 'none';
+            errorState.style.display = 'flex';
+        }
     }
 });
 

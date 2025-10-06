@@ -2,17 +2,18 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>{% block title %}Dự đoán độ thành công phim{% endblock %}</title>
     <meta name="description" content="Công cụ dự đoán độ thành công của phim dựa trên machine learning. Phân tích ngân sách, diễn viên, đạo diễn và các yếu tố khác." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=5.4" />
     <script defer src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div class="version-tag">v0.2</div>
     <header class="site-header">
         <div class="container header-inner">
             <a href="{{ url_for('home') }}" class="logo">

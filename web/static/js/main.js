@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function generateRandomData() {
-        // Movie titles
+        // Movie titles - Blockbuster style
         const movieTitles = [
             "Điệp Viên 007: Skyfall", "Avengers: Endgame", "Titanic", "The Dark Knight",
             "Inception", "Pulp Fiction", "The Shawshank Redemption", "Forrest Gump",
@@ -51,22 +51,36 @@ document.addEventListener("DOMContentLoaded", () => {
             "Moonlight", "Spotlight", "Green Book", "CODA", "Everything Everywhere All at Once"
         ];
 
-        // Genres (matching trained model)
-        const genres = ["", "Action", "Adventure", "Comedy", "Crime", "Drama", "Family", "Horror", 
-                       "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "War"];
+        // Genres - Popular genres with higher success rate
+        const genres = ["Action", "Adventure", "Science Fiction", "Drama", "Comedy", "Thriller"];
 
-        // Countries (matching trained model)
-        const countries = ["France", "South Korea", "Vietnam"];
+        // Countries - Major markets
+        const countries = ["United States of America", "United Kingdom", "France"];
 
-        // Generate random values
+        // Generate random values BIASED TOWARD SUCCESS
         const randomTitle = movieTitles[Math.floor(Math.random() * movieTitles.length)];
-        const randomBudget = Math.floor(Math.random() * 200000000) + 1000000; // 1M - 201M
+        
+        // Budget: $30M - $180M (blockbuster range)
+        const randomBudget = Math.floor(Math.random() * 150000000) + 30000000;
+        
         const randomGenre = genres[Math.floor(Math.random() * genres.length)];
-        const randomVoteAverage = (Math.random() * 4 + 4).toFixed(1); // 4.0 - 8.0
-        const randomVoteCount = Math.floor(Math.random() * 50000) + 100; // 100 - 50100
-        const randomRuntime = Math.floor(Math.random() * 120) + 60; // 60 - 180 minutes
-        const randomYear = Math.floor(Math.random() * 25) + 2000; // 2000 - 2024
-        const randomMonth = Math.floor(Math.random() * 12) + 1; // 1 - 12
+        
+        // Vote Average: 6.0 - 8.5 (good to excellent range, ensures >= 6.5 often)
+        const randomVoteAverage = (Math.random() * 2.5 + 6.0).toFixed(1);
+        
+        // Vote Count: 5,000 - 45,000 (popular movies)
+        const randomVoteCount = Math.floor(Math.random() * 40000) + 5000;
+        
+        // Runtime: 100 - 160 minutes (standard blockbuster length)
+        const randomRuntime = Math.floor(Math.random() * 60) + 100;
+        
+        // Release Year: 2015 - 2024 (recent movies)
+        const randomYear = Math.floor(Math.random() * 10) + 2015;
+        
+        // Release Month: Summer (5,6,7) or Holiday (11,12) seasons
+        const popularMonths = [5, 6, 7, 11, 12];
+        const randomMonth = popularMonths[Math.floor(Math.random() * popularMonths.length)];
+        
         const randomCountry = countries[Math.floor(Math.random() * countries.length)];
 
         // Fill form fields

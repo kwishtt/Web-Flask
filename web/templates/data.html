@@ -67,7 +67,7 @@
             <div class="chart-card">
                 <h3>📊 Phân bố ngân sách sản xuất</h3>
                 <div class="chart-container">
-                    {{ budget_dist|safe }}
+                    <img src="{{ url_for('static', filename='images/charts/budget_dist.png') }}" alt="Budget Distribution" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
                     Phân bố ngân sách đa dạng từ indie films đến blockbusters, phản ánh thị trường điện ảnh toàn cầu.
@@ -78,33 +78,10 @@
             <div class="chart-card">
                 <h3>⭐ Phân bố điểm đánh giá</h3>
                 <div class="chart-container">
-                    {{ vote_dist|safe }}
+                    <img src="{{ url_for('static', filename='images/charts/vote_dist.png') }}" alt="Vote Distribution" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
-                    Điểm đánh giá tập trung chủ yếu từ 5.5 đến 7.5, cho thấy chất lượng phim tương đối đồng đều trên toàn cầu.
-                </p>
-            </div>
-
-            <!-- Budget vs Revenue Scatter -->
-            <div class="chart-card chart-full">
-                <h3>💰 Mối quan hệ Ngân sách - Doanh thu</h3>
-                <div class="chart-container">
-                    {{ budget_revenue|safe }}
-                </div>
-                <p class="chart-description">
-                    Màu xanh lá: Phim thành công (ROI ≥1 & Vote ≥6.5), Màu đỏ: Phim không thành công.
-                    Các điểm ở trên đường chéo cho thấy phim có lãi.
-                </p>
-            </div>
-
-            <!-- Genre Distribution -->
-            <div class="chart-card">
-                <h3>🎭 Thể loại phim phổ biến</h3>
-                <div class="chart-container">
-                    {{ genre_dist|safe }}
-                </div>
-                <p class="chart-description">
-                    Drama là thể loại phổ biến nhất trên toàn cầu, theo sau bởi Action, Comedy và Thriller.
+                    Điểm đánh giá tập trung chủ yếu từ 5.5 đến 7.5, cho thấy chất lượng phim tương đối đồng đều.
                 </p>
             </div>
 
@@ -112,43 +89,43 @@
             <div class="chart-card">
                 <h3>⏱️ Phân bố thời lượng phim</h3>
                 <div class="chart-container">
-                    {{ runtime_dist|safe }}
+                    <img src="{{ url_for('static', filename='images/charts/runtime_dist.png') }}" alt="Runtime Distribution" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
                     Hầu hết các phim có thời lượng từ 90-120 phút, phù hợp với định dạng phim truyện.
                 </p>
             </div>
-
-            <!-- Yearly Trends -->
-            <div class="chart-card chart-full">
-                <h3>📈 Xu hướng sản xuất và thành công theo năm</h3>
+            
+            <!-- Model Performance -->
+            <div class="chart-card">
+                <h3>🎯 Hiệu suất mô hình XGBoost</h3>
                 <div class="chart-container">
-                    {{ yearly_trend|safe }}
+                    <img src="{{ url_for('static', filename='../reports/plots/confusion_matrix_xgboost.png') }}" alt="Confusion Matrix" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
-                    Số lượng phim sản xuất và tỷ lệ thành công thay đổi theo thời gian. Dữ liệu từ {{ stats.year_range }}.
+                    Ma trận nhầm lẫn cho thấy độ chính xác cao của model trong việc phân loại phim thành công/thất bại.
                 </p>
             </div>
 
-            <!-- Vote Analysis -->
-            <div class="chart-card chart-full">
-                <h3>📊 Phân tích đánh giá chi tiết</h3>
+            <!-- ROC Curve -->
+            <div class="chart-card">
+                <h3>� Đường cong ROC</h3>
                 <div class="chart-container">
-                    {{ vote_analysis|safe }}
+                    <img src="{{ url_for('static', filename='../reports/plots/roc_curve_xgboost.png') }}" alt="ROC Curve" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
-                    Mối quan hệ giữa số lượng người đánh giá và điểm trung bình. Phim thành công thường có nhiều đánh giá hơn.
+                    ROC curve với AUC cao cho thấy model phân biệt tốt giữa phim thành công và thất bại.
                 </p>
             </div>
 
-            <!-- ROI Distribution -->
+            <!-- Feature Importance -->
             <div class="chart-card chart-full">
-                <h3>💸 Phân bố tỷ suất lợi nhuận (ROI)</h3>
+                <h3>� Độ quan trọng của các yếu tố</h3>
                 <div class="chart-container">
-                    {{ roi_dist|safe }}
+                    <img src="{{ url_for('static', filename='../reports/plots/shap_summary_xgboost.png') }}" alt="SHAP Summary" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
                 <p class="chart-description">
-                    ROI âm (< 0%) = thua lỗ, ROI dương (> 0%) = lãi. Đường đứt nét đỏ là điểm hòa vốn.
+                    Biểu đồ SHAP cho thấy Vote Average và Vote Count là 2 yếu tố quan trọng nhất quyết định thành công của phim.
                 </p>
             </div>
         </div>

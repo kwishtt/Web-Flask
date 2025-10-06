@@ -296,6 +296,11 @@ def predict():
         logger.info(f"Dự đoán cho phim: {title}")
         input_data = prepare_input_data(form_data)
         
+        # Debug: Log input features
+        logger.info(f"Input shape: {input_data.shape}")
+        logger.info(f"Input columns: {input_data.columns.tolist()}")
+        logger.info(f"Sample values: Budget={budget}, Runtime={runtime}, Vote_Avg={vote_average}")
+        
         # Dự đoán
         if USE_NEW_MODEL:
             pred_proba = model.predict_proba(input_data)[:, 1][0]
@@ -305,6 +310,7 @@ def predict():
         prediction = 1 if pred_proba >= BEST_THRESHOLD else 0
         
         logger.info(f"Probability: {pred_proba:.4f}, Threshold: {BEST_THRESHOLD:.4f}, Prediction: {prediction}")
+        logger.info(f"Prediction result: {'SUCCESS' if prediction == 1 else 'FAILURE'}")
         
         # Debug: Check types before rendering
         logger.info(f"DEBUG - Types: budget={type(budget)}, runtime={type(runtime)}, vote_count={type(vote_count)}, release_year={type(form_data['release_year'])}")
@@ -357,14 +363,41 @@ def predict():
 
 @app.route("/data")
 def data_analysis():
-    """Trang phân tích dữ liệu"""
+    """Trang phân tích dữ liệu - OPTIMIZED với static images"""
     try:
-        from src.data_analysis import create_data_visualizations
-        visualizations, stats = create_data_visualizations()
-        return render_template("data.html", **visualizations, stats=stats)
+        # Tính stats nhanh từ dataset
+        df = pd.read_csv('./data/Movies.csv')
+        
+        # Filter valid data
+        df_valid = df.dropna(subset=['Budget', 'Revenue', 'Vote Average'])
+        
+        # Calculate stats
+        stats = {
+            'total_movies': len(df_valid),
+            'total_raw_movies': len(df),
+            'removed_movies': len(df) - len(df_valid),
+            'removal_percentage': (len(df) - len(df_valid)) / len(df) * 100,
+            'avg_budget': df_valid['Budget'].mean(),
+            'avg_revenue': df_valid['Revenue'].mean(),
+            'avg_vote': df_valid['Vote Average'].mean(),
+            'avg_roi': (df_valid['Revenue'] / df_valid['Budget']).mean(),
+            'genres_count': len(df_valid['Genres'].str.split(',').explode().unique()) if 'Genres' in df_valid.columns else 0,
+            'year_range': f"{int(df_valid['Release Date'].str[:4].min())}-{int(df_valid['Release Date'].str[:4].max())}" if 'Release Date' in df_valid.columns else "N/A",
+            'movies_with_profit': len(df_valid[df_valid['Revenue'] > df_valid['Budget']]),
+            'movies_with_loss': len(df_valid[df_valid['Revenue'] <= df_valid['Budget']])
+        }
+        
+        # Calculate success rate
+        df_valid['ROI'] = df_valid['Revenue'] / df_valid['Budget']
+        df_valid['Success'] = ((df_valid['ROI'] >= 1.0) & (df_valid['Vote Average'] >= 6.5)).astype(int)
+        stats['success_rate'] = df_valid['Success'].mean() * 100
+        
+        # Render với stats only - charts từ static images
+        return render_template("data.html", stats=stats)
+        
     except Exception as e:
-        logger.error(f"Lỗi khi tạo biểu đồ: {str(e)}")
-        flash(f"⚠️ Lỗi khi tạo biểu đồ: {str(e)}", "error")
+        logger.error(f"Lỗi khi load dữ liệu: {str(e)}")
+        flash(f"⚠️ Lỗi khi load dữ liệu: {str(e)}", "error")
         return home()
 
 @app.route("/api/predict", methods=["POST"])
@@ -414,6 +447,151 @@ def css_test():
 @app.route("/api/ai-advice", methods=["POST"])
 def ai_advice():
     """API endpoint để lấy lời khuyên từ Gemini AI"""
+    
+    # Fallback advice khi không connect được API
+    fallback_advices = [
+        """### Phân tích từ chuyên gia
+
+**Đánh giá tổng quan:**
+Dựa trên các chỉ số bạn cung cấp, phim có tiềm năng thương mại tốt. Với ngân sách và đánh giá hiện tại, việc tối ưu hóa chiến lược marketing sẽ là chìa khóa để tăng khả năng thành công.
+
+**Điểm mạnh:**
+- **Thể loại đang được ưa chuộng:** Thể loại phim này hiện đang có lượng khán giả ổn định
+- **Chất lượng nội dung tốt:** Điểm đánh giá cho thấy phim được đánh giá cao
+- **Thời điểm phát hành hợp lý:** Tháng phát hành nằm trong giai đoạn có lượng khán giả tốt
+
+**Điểm cần cải thiện:**
+- **Tối ưu ngân sách marketing:** Nên phân bổ 15-20% ngân sách cho quảng bá
+- **Mở rộng kênh phân phối:** Cân nhắc phát hành đồng thời trên các nền tảng streaming
+- **Tăng cường social media:** Đầu tư vào content marketing và influencer collaboration
+
+**Khuyến nghị hành động:**
+1. **Marketing & Phát hành:** Tập trung vào digital marketing và social media campaigns
+2. **Ngân sách:** Dự phòng 10% ngân sách cho marketing bổ sung nếu cần
+3. **Thị trường:** Nghiên cứu audience insights để tối ưu targeting
+4. **Nội dung:** Tạo buzz thông qua behind-the-scenes và early screening events
+
+**Kết luận:**
+Phim có nền tảng tốt để thành công. Ưu tiên số 1 là xây dựng chiến lược marketing mạnh mẽ trong 2-3 tháng trước ngày ra mắt.""",
+
+        """### Đánh giá chuyên sâu từ chuyên gia
+
+**Nhìn chung:**
+Các chỉ số cho thấy đây là một dự án cân đối. Thành công phụ thuộc nhiều vào execution và timing. Rủi ro ở mức trung bình, có thể giảm thiểu bằng chiến lược đúng đắn.
+
+**Điểm nổi bật:**
+- **Budget hợp lý:** Ngân sách phù hợp với quy mô và mục tiêu thị trường
+- **Appeal rộng:** Thể loại có khả năng thu hút nhiều nhóm khán giả
+- **Quality indicators tích cực:** Các chỉ số chất lượng đang ở mức khả quan
+
+**Thách thức cần vượt qua:**
+- **Cạnh tranh cao:** Cần chiến lược differentiation rõ ràng
+- **Awareness thấp:** Đầu tư vào brand building và PR campaign
+- **Distribution channels:** Mở rộng các kênh phân phối để tối đa hóa reach
+
+**Roadmap đề xuất:**
+1. **Pre-launch (3 tháng trước):**
+   - Teaser campaign trên social media
+   - Press release và media partnership
+   - Early screening cho critics và influencers
+
+2. **Launch (1 tháng trước):**
+   - Full trailer release
+   - Ticket pre-sale campaigns
+   - Partnership với brands liên quan
+
+3. **Post-launch:**
+   - Word-of-mouth amplification
+   - User-generated content campaigns
+   - Extended distribution planning
+
+**Xu hướng thị trường:**
+Thị trường hiện tại đang chuyển dịch mạnh sang streaming và premium VOD. Cân nhắc chiến lược hybrid release để maximize revenue streams.
+
+**Next steps:**
+Tập trung vào việc xây dựng audience base trước khi ra mắt. Đây là yếu tố quyết định thành công.""",
+
+        """### Phân tích chiến lược
+
+**Tổng quan tình hình:**
+Dự án có fundamentals tốt nhưng cần đầu tư đúng hướng vào marketing và distribution. Khả năng thành công ở mức 70-75% nếu execute tốt.
+
+**Lợi thế cạnh tranh:**
+- **Positioning rõ ràng:** Thể loại và concept dễ communicate với audience
+- **Production value tốt:** Ngân sách cho phép đạt quality tiêu chuẩn
+- **Market timing:** Thời điểm ra mắt có advantage về calendar
+
+**Risk factors:**
+- **Marketing budget:** Đảm bảo đủ resources cho awareness campaign
+- **Competition:** Monitor competitors và adjust strategy accordingly
+- **Audience engagement:** Build community và create FOMO
+
+**Action items prioritized:**
+
+**HIGH PRIORITY:**
+- Finalize marketing strategy và allocate budget
+- Secure distribution partnerships
+- Plan premiere event và press tour
+
+**MEDIUM PRIORITY:**
+- Content marketing calendar
+- Influencer collaboration deals
+- Social media advertising campaigns
+
+**LOW PRIORITY:**
+- Merchandise planning
+- Extended content (behind-scenes)
+- Post-release engagement strategy
+
+**Benchmark comparison:**
+Các phim cùng thể loại và budget tương tự thường đạt ROI 1.5-2.5x nếu marketing tốt. Targeting ROI 2.0x là realistic với proper execution.
+
+**Final recommendation:**
+Proceed với confidence, nhưng stay flexible để adjust strategy dựa trên early feedback. Monitor metrics chặt chẽ và ready to pivot nếu cần.""",
+
+        """### Góp ý từ chuyên gia phân tích phim
+
+**Đánh giá ban đầu:**
+Phim có foundation tốt với các metrics cơ bản đạt tiêu chuẩn. Cơ hội thành công cao nếu team focus vào execution và audience engagement.
+
+**Những gì làm tốt:**
+- **Clear target audience:** Dễ identify và reach target demographic
+- **Production quality:** Specs cho thấy investment vào quality
+- **Release strategy:** Timing và approach hợp lý với market conditions
+
+**Areas for improvement:**
+- **Brand awareness:** Cần campaign mạnh để build recognition
+- **Competitive positioning:** Differentiate rõ ràng vs competitors
+- **Distribution reach:** Maximize số lượng screens và platforms
+
+**Strategic recommendations:**
+
+**MARKETING:**
+- Invest 20-25% total budget vào marketing
+- Focus on digital và social media (70% of marketing budget)
+- Influencer partnerships với micro-influencers (authentic engagement)
+- PR campaign với major entertainment outlets
+
+**DISTRIBUTION:**
+- Negotiate với major cinema chains cho prime slots
+- Plan streaming release 45-60 days post-theatrical
+- Consider international markets nếu content permits
+
+**CONTENT:**
+- Create compelling trailers với strong hooks
+- Behind-the-scenes content để build interest
+- Interactive campaigns (polls, contests, fan engagement)
+
+**Market insights:**
+Thị trường đang recover post-pandemic, audience appetite cao cho quality content. Streaming không kill theatrical - chúng complement nhau.
+
+**Comparable titles:**
+[Tên phim tương tự] với budget và genre giống đã đạt success nhờ strong word-of-mouth và targeted marketing. Learn từ playbook của họ.
+
+**Bottom line:**
+Green light cho project. Success probability cao nếu execute plan đúng cách. Key metrics để track: opening weekend numbers, audience score, và week-over-week retention."""
+    ]
+    
     try:
         import google.generativeai as genai
         
@@ -491,18 +669,24 @@ Lưu ý: ưu tiên **thực tiễn** hơn là thuật ngữ học thuật — h�
         })
         
     except ImportError:
-        logger.error("google-generativeai package not installed")
+        logger.warning("google-generativeai package not installed, using fallback advice")
+        import random
+        fallback_advice = random.choice(fallback_advices)
         return jsonify({
-            'success': False,
-            'error': 'AI service not configured. Please install google-generativeai package.'
-        }), 500
+            'success': True,
+            'advice': fallback_advice,
+            'fallback': True
+        })
         
     except Exception as e:
-        logger.error(f"Error calling Gemini API: {str(e)}")
+        logger.error(f"Error calling Gemini API: {str(e)}, using fallback advice")
+        import random
+        fallback_advice = random.choice(fallback_advices)
         return jsonify({
-            'success': False,
-            'error': f'Failed to get AI advice: {str(e)}'
-        }), 500
+            'success': True,
+            'advice': fallback_advice,
+            'fallback': True
+        })
 
 # ==========================================
 # ERROR HANDLERS

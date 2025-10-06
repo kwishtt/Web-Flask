@@ -76,36 +76,6 @@
     </div>
 </section>
 
-
-<section class="features" id="features">
-    <div class="container section-header">
-        <p class="eyebrow">Tính năng nổi bật</p>
-        <h2>Tại sao nên sử dụng công cụ này?</h2>
-    </div>
-    <div class="container feature-grid">
-        <article class="feature-card">
-            <span class="icon-pill"><iconify-icon icon="fluent:brain-20-regular" width="26" height="26"></iconify-icon></span>
-            <h3>AI Thông minh</h3>
-            <p>Mô hình machine learning tiên tiến phân tích hàng nghìn yếu tố để đưa ra dự đoán chính xác.</p>
-        </article>
-        <article class="feature-card">
-            <span class="icon-pill"><iconify-icon icon="fluent:flash-20-regular" width="26" height="26"></iconify-icon></span>
-            <h3>Nhanh chóng</h3>
-            <p>Dự đoán trong vài giây với giao diện đơn giản, dễ sử dụng cho mọi người.</p>
-        </article>
-        <article class="feature-card">
-            <span class="icon-pill"><iconify-icon icon="fluent:data-pie-20-regular" width="26" height="26"></iconify-icon></span>
-            <h3>Dữ liệu phong phú</h3>
-            <p>Phân tích chi tiết các yếu tố như ngân sách, diễn viên, đạo diễn, thể loại và marketing.</p>
-        </article>
-        <article class="feature-card">
-            <span class="icon-pill"><iconify-icon icon="fluent:analytics-20-regular" width="26" height="26"></iconify-icon></span>
-            <h3>Phân tích trực quan</h3>
-            <p>Khám phá insights từ dữ liệu phim qua biểu đồ tương tác và thống kê chi tiết.</p>
-        </article>
-    </div>
-</section>
-
 <section class="predict" id="predict">
     <div class="container predict-grid">
         <div>
@@ -114,15 +84,19 @@
             <p>Điền đầy đủ thông tin để nhận dự đoán độ thành công từ AI. Tất cả dữ liệu được xử lý an toàn.</p>
         </div>
         <form class="predict-form" action="{{ url_for('predict') }}" method="post">
+            <!-- Movie Title -->
             <div class="form-group">
                 <label for="title">Tên phim</label>
-                <input type="text" id="title" name="title" placeholder="Ví dụ: Avengers: Endgame" required />
+                <input type="text" id="title" name="title" placeholder="Ví dụ: Avengers: Endgame" required maxlength="200" />
+                <small style="color: #8494a8; font-size: 0.8rem;">Tên phim từ 2-200 ký tự</small>
             </div>
 
+            <!-- Budget & Genre -->
             <div class="form-row">
                 <div class="form-group">
                     <label for="budget">Ngân sách sản xuất (USD)</label>
-                    <input type="number" id="budget" name="budget" placeholder="356000000" min="1000" required />
+                    <input type="number" id="budget" name="budget" placeholder="50000000" min="100000" max="500000000" required />
+                    <small style="color: #8494a8; font-size: 0.8rem;">$100k - $500M (Realistic range)</small>
                 </div>
                 <div class="form-group">
                     <label for="genre">Thể loại</label>
@@ -134,21 +108,26 @@
                 </div>
             </div>
 
+            <!-- Vote Average & Vote Count -->
             <div class="form-row">
                 <div class="form-group">
                     <label for="director_rating">Đánh giá trung bình (Vote Average)</label>
-                    <input type="number" id="director_rating" name="director_rating" placeholder="7.5" min="0" max="10" step="0.1" required />
+                    <input type="number" id="director_rating" name="director_rating" placeholder="7.0" min="1.0" max="10.0" step="0.1" required />
+                    <small style="color: #8494a8; font-size: 0.8rem;">1.0 - 10.0 (Realistic ratings)</small>
                 </div>
                 <div class="form-group">
                     <label for="actor_rating">Số lượng đánh giá (Vote Count)</label>
-                    <input type="number" id="actor_rating" name="actor_rating" placeholder="1000" min="1" required />
+                    <input type="number" id="actor_rating" name="actor_rating" placeholder="5000" min="10" max="100000" required />
+                    <small style="color: #8494a8; font-size: 0.8rem;">10 - 100k votes</small>
                 </div>
             </div>
 
+            <!-- Runtime & Country -->
             <div class="form-row">
                 <div class="form-group">
                     <label for="runtime">Thời lượng (phút)</label>
-                    <input type="number" id="runtime" name="runtime" placeholder="120" min="30" max="300" required />
+                    <input type="number" id="runtime" name="runtime" placeholder="120" min="60" max="240" required />
+                    <small style="color: #8494a8; font-size: 0.8rem;">60 - 240 phút (Feature film)</small>
                 </div>
                 <div class="form-group">
                     <label for="country">Quốc gia sản xuất</label>
@@ -160,6 +139,7 @@
                 </div>
             </div>
 
+            <!-- Release Date -->
             <div class="form-group">
                 <label for="release_date">Ngày phát hành</label>
                 <div class="date-input-group">
@@ -179,8 +159,9 @@
                         <option value="12">Tháng 12</option>
                     </select>
                     <span class="date-separator">/</span>
-                    <input type="number" id="release_year" name="release_year" class="year-input" placeholder="2024" min="1900" max="2030" required />
+                    <input type="number" id="release_year" name="release_year" class="year-input" placeholder="2024" min="2020" max="2030" required />
                 </div>
+                <small style="color: #8494a8; font-size: 0.8rem;">Năm 2020-2030 (Recent & upcoming)</small>
             </div>
 
             <div class="form-actions">
