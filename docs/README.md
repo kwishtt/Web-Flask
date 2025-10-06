@@ -6,10 +6,10 @@
 
 ![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)
 
-![ML](https://img.shields.io/badge/ML-scikit--learn%20%7C%20XGBoost%20%7C%20LightGBM-orange.svg)## ✨ Tính năng chính
+![ML](https://img.shields.io/badge/ML-scikit--learn%20%7C%20XGBoost%20%7C%20LightGBM-orange.svg)
 
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-success.svg)
-
+## ✨ Tính năng chính
 - **Binary Classification**: Dự đoán phim thành công hay không thành công
 
 Ứng dụng web dự đoán độ thành công của phim sử dụng Machine Learning tiên tiến với Flask backend và giao diện hiện đại.- **Real Movie Data**: Sử dụng dataset Movies.csv với 63 bộ phim Việt Nam
