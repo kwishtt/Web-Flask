@@ -2,6 +2,128 @@
 
 {% block title %}Phân tích dữ liệu phim - Movie Data Analytics{% endblock %}
 
+{% block head %}
+<style>
+/* Sample Data Table Styling */
+.data-sample {
+    padding: 60px 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+}
+
+.sample-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sample-header h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sample-header p {
+    color: #c5c7d4;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.sample-table-container {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 16px;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.sample-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.sample-table thead th {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 16px 12px;
+    text-align: left;
+    border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sample-table tbody td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    color: #e2e8f0;
+    vertical-align: top;
+}
+
+.sample-table tbody tr:nth-child(even) {
+    background: rgba(139, 92, 246, 0.02);
+}
+
+.sample-table tbody tr:hover {
+    background: rgba(139, 92, 246, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.sample-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .sample-table-container {
+        overflow-x: auto;
+        margin: 0 -20px;
+        border-radius: 0;
+    }
+    
+    .sample-table {
+        min-width: 800px;
+    }
+    
+    .sample-header h2 {
+        font-size: 2rem;
+    }
+    
+    .sample-header p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+}
+
+.sample-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Data quality info styling */
+.data-quality-info details {
+    margin-top: 15px;
+}
+
+.data-quality-info summary {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.data-quality-info summary:hover {
+    color: #c084fc !important;
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <section class="data-header">
     <div class="container section-header">
@@ -56,6 +178,56 @@
                 <span class="stat-label">Điểm đánh giá TB</span>
                 <span class="stat-sublabel" style="font-size: 0.75rem; color: #e67e22;">Thang điểm 10</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="data-sample">
+    <div class="container">
+        <div class="sample-header">
+            <h2>📋 Mẫu dữ liệu phân tích</h2>
+            <p>10 dòng đầu tiên từ dataset {{ stats.total_movies }} bộ phim đã được làm sạch và chuẩn hóa</p>
+        </div>
+        
+        <div class="sample-table-container">
+            <table class="sample-table">
+                <thead>
+                    <tr>
+                        {% for col in stats.sample_columns %}
+                        <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in stats.sample_data %}
+                    <tr>
+                        {% for col in stats.sample_columns %}
+                        <td>
+                            {% if col == 'Budget' or col == 'Revenue' %}
+                                ${{ "{:,.0f}".format(row[col]) }}
+                            {% elif col == 'Vote Average' %}
+                                {{ "%.1f"|format(row[col]) }}/10
+                            {% elif col == 'Vote Count' %}
+                                {{ "{:,.0f}".format(row[col]) }}
+                            {% elif col == 'Runtime' %}
+                                {{ row[col] }} phút
+                            {% else %}
+                                {{ row[col] }}
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="sample-info">
+            <p style="color: #a855f7; font-size: 0.9rem; text-align: center; margin-top: 20px;">
+                💡 <strong>Dataset đầy đủ:</strong> {{ stats.total_movies }} bộ phim • 
+                <strong>Thời gian:</strong> {{ stats.year_range }} • 
+                <strong>Chất lượng:</strong> Đã loại bỏ {{ stats.removed_movies }} phim thiếu dữ liệu
+            </p>
         </div>
     </div>
 </section>

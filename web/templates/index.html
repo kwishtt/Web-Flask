@@ -87,7 +87,7 @@
             <!-- Movie Title -->
             <div class="form-group">
                 <label for="title">Tên phim</label>
-                <input type="text" id="title" name="title" placeholder="Ví dụ: Avengers: Endgame" required maxlength="200" />
+                <input type="text" id="title" name="title" placeholder="Ví dụ: Quỷ ăn tạng : Hòa Khổng" required maxlength="200" />
                 <small style="color: #8494a8; font-size: 0.8rem;">Tên phim từ 2-200 ký tự</small>
             </div>
 
@@ -131,11 +131,13 @@
                 </div>
                 <div class="form-group">
                     <label for="country">Quốc gia sản xuất</label>
-                    <select id="country" name="country" class="custom-select" required>
+                    <input type="text" id="country" name="country" class="custom-input" placeholder="Ví dụ: United States of America" list="countries-list" autocomplete="off" />
+                    <datalist id="countries-list">
                         {% for country in countries %}
-                        <option value="{{ country }}">{{ country }}</option>
+                        <option value="{{ country }}">
                         {% endfor %}
-                    </select>
+                    </datalist>
+                    <small style="color: #8494a8; font-size: 0.8rem;">Gõ để tìm quốc gia (tùy chọn)</small>
                 </div>
             </div>
 

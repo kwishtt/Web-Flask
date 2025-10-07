@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Mobile menu functionality
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const primaryNav = document.getElementById('primaryNav');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    
+    if (mobileMenuToggle && primaryNav && mobileMenuOverlay) {
+        const toggleMobileMenu = () => {
+            mobileMenuToggle.classList.toggle('active');
+            primaryNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = primaryNav.classList.contains('active') ? 'hidden' : '';
+        };
+        
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+        
+        // Close mobile menu when clicking nav links
+        primaryNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+    }
+
     const navToggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".primary-nav");
 

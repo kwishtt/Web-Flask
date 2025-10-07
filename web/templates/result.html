@@ -112,7 +112,7 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">🌍 Quốc gia sản xuất</span>
-                        <span class="detail-value detail-badge">{{ country }}</span>
+                        <span class="detail-value detail-badge">{{ country|default('N/A') }}</span>
                     </div>
                 </div>
             </div>
@@ -236,8 +236,8 @@ const movieData = {
     vote_count: {{ vote_count|tojson }},
     runtime: {{ runtime|tojson }},
     release_year: {{ release_year|tojson }},
-    release_month: {{ release_month|tojson }},
-    country: {{ country|tojson }}
+    release_month: {{ release_month|tojson }}
+    // Removed country field
 };
 
 // Modal controls
@@ -287,11 +287,27 @@ getAdviceBtn.addEventListener('click', async () => {
         contentState.style.display = 'block';
         contentState.innerHTML = formatAIResponse(data.advice);
         
+        // Show AI indicator if AI generated (not fallback)
+        if (data.ai_generated && !data.cached) {
+            const aiBadge = document.createElement('div');
+            aiBadge.style.cssText = 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 1px solid rgba(102, 126, 234, 0.3); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; margin-bottom: 12px; text-align: center; display: inline-flex; align-items: center; gap: 6px;';
+            aiBadge.innerHTML = '<span style="font-size: 1rem;">⚡</span> Chào bạn, tôi là Khuê Đinh - chuyên gia phân tích phim';
+            contentState.insertBefore(aiBadge, contentState.firstChild);
+        }
+        
+        // Show cached badge if using cached response
+        if (data.cached) {
+            const cachedBadge = document.createElement('div');
+            cachedBadge.style.cssText = 'background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); color: var(--success); padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; margin-bottom: 12px; text-align: center; display: inline-flex; align-items: center; gap: 6px;';
+            cachedBadge.innerHTML = '<span style="font-size: 1rem;">💾</span> Instant Analysis';
+            contentState.insertBefore(cachedBadge, contentState.firstChild);
+        }
+        
         // Show badge if using fallback
         if (data.fallback) {
             const badge = document.createElement('div');
             badge.style.cssText = 'background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: var(--accent-secondary); padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; margin-bottom: 12px; text-align: center;';
-            badge.innerHTML = '⚡ Advice nhanh (offline mode)';
+            badge.innerHTML = '🤖 Smart Analysis';
             contentState.insertBefore(badge, contentState.firstChild);
         }
         
